@@ -364,9 +364,9 @@ ash() {
 #####
 function os () {
 if [ -e $BIN/termux-info ]; then
-		BINDIR="${PREFIX}/bin"
+		BINDIR="${PREFIX}/bin/phs"
 	else
-	        BINDIR="/usr/bin"
+	        BINDIR="/usr/bin/phs"
 fi
 }
 
