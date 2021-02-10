@@ -1485,7 +1485,7 @@ echo
 			   rm -rf Log.log
 			   fi
 			   sleep 0.5
-			   mv cam* /sdcard/Camera_hack >> /dev/null 2>&1 
+			   mv cam* ${files}/Camera_hack >> /dev/null 2>&1 
 			   done
 			   
 			   break;
@@ -1539,7 +1539,7 @@ echo
 			    rm -rf Log.log
 			    fi
 			    sleep 0.5
-			    mv 20* /sdcard/Audio_hack >> /dev/null 2>&1 
+			    mv 20* ${files}/Audio_hack >> /dev/null 2>&1 
 			    done
 			   
 		            break;
