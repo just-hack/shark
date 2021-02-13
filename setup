@@ -58,14 +58,12 @@ $token >> /dev/null 2>&1 && chmod +x ngrok && mv ngrok $BIN
 function final_touchup() {
 cp -R phs ${BIN}
 cp -R shark ${BIN}
+printf "${purple} simply run : shark \n ${nc}"
 }
 
-###########XXXXXXXXXXXXX####################
-#     JUST LEARNING KEEP SUPPORTING        #
-############XXXXXXXXXXXX####################
-echo -e "\e[92m[+] To run the tool from anywhere simply type : shark \e[m "
-echo 
+
 #####################################
 #       DON'T TRY TO COPY 😂😂     #
-#           THANKYOU                #
+#   JUST LEARNING KEEP SUPPORTING   #
+#             THANKYOU              #
 #####################################
