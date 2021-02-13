@@ -377,11 +377,6 @@ if [ -e $BIN/termux-info ]; then
 fi
 }
 
-function XTERM () {
-if [ "OS" != "TERMUX" ]; then 
-
-
-
 #######
 # MAIN
 #######
