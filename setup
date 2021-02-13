@@ -1,4 +1,23 @@
-#!/data/data/com.termux/files/usr/bin/bash
+#!/bin/bash
+
+
+function os () {
+if [ -e $BIN/termux-info ]; then
+		OS=TERMUX
+	else
+		OS=DEBIAN 
+fi
+}
+
+function Dependicies() {
+for i in apache2 php jq tail curl wget; do
+    if [ ! -f "/usr/bin/${i}" ]; then
+    sudo apt-get install ${i} -y 
+    fi
+    done
+}
+
+
 clear
 echo 
 echo 
