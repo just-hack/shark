@@ -52,12 +52,13 @@ fi
 function setup_ngrok() {
 printf "${green} Enter your ngrok authtoken :\n "
 read authtoken
-$token >> /dev/null 2>&1 && chmod +x ngrok && mv ngrok $BIN
+$authtoken >> /dev/null 2>&1 && chmod +x ngrok && mv ngrok $BIN
 }
 
 function final_touchup() {
 cp -R phs ${BIN}
 cp -R shark ${BIN}
+# cp -R shark_logo ${BIN}
 printf "${purple} simply run : shark \n ${nc}"
 }
 
