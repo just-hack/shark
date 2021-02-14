@@ -15,7 +15,16 @@ purple="\033[0;35m"                                         ##
 blue="\033[1;34m"                                           ##
 nc="\e[0m"                                                  ## 
 
+
 BIN="${PREFIX}/bin"
+main="${PREFIX}/share"
+
+
+function git() {
+[ -d "${main}/shark" ] && rm -rf ${main}/shark
+git clone https://github.com/Bhaviktutorials/shark.git ${main}
+}
+
 
 function os () {
 if [ -e $BIN/termux-info ]; then
@@ -56,8 +65,8 @@ $authtoken >> /dev/null 2>&1 && chmod +x ngrok && mv ngrok $BIN
 }
 
 function final_touchup() {
-cp -R phs ${BIN}
-cp -R shark ${BIN}
+for i in shark do;
+mv ${main}/shark/${i} ${BIN}
 # cp -R shark_logo ${BIN}
 printf "${purple} simply run : shark \n ${nc}"
 }
