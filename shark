@@ -38,6 +38,7 @@ VERSION="2.0.3"
 
 BIN="${PREFIX}/bin"
 
+
 ################
 # PRINT MESSAGE
 ################
@@ -61,10 +62,12 @@ error_msg() {
 
 function os () {
 if [ -e $BIN/termux-info ]; then
+                BIN="${PREFIX}/bin"
 		php="${PREFIX}/share/phs"
 		files="/sdcard"
 		OS=TERMUX
 	else
+	        BIN="/usr/bin"
 	        php="/usr/share/phs"
 		files="$HOME/Desktop"
 		OS=DEBIAN 
@@ -72,7 +75,7 @@ fi
 }
 
 function main_update() {
-###
+wget https://github.com/Bhaviktutorials/shark/raw/main/shark -O ${hackadroid} && rm -rf ${old_hackadroid} && cp -rf ${hackadroid} /usr/bin && chmod 777 /usr/bin/hackadroid"
 }
 function update() {
 	version=$(curl -L -s https://raw.githubusercontent.com/Bhaviktutrials/shark/master/shark | grep -w "VERSION=" | head -n1)
