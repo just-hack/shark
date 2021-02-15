@@ -19,22 +19,21 @@ nc="\e[0m"                                                  ##
 BIN="${PREFIX}/bin"
 main="${PREFIX}/share"
 
+function os () {
+if [ -e $BIN/termux-info ]; then
+		OS=TERMUX			
+	else
+		OS=DEBIAN 
+		BIN="/usr/bin"
+		main="/usr/share"
+fi
+}
 
 function git() {
 [ -d "${main}/shark" ] && rm -rf ${main}/shark
 git clone https://github.com/Bhaviktutorials/shark.git ${main}
 }
 
-
-function os () {
-if [ -e $BIN/termux-info ]; then
-		OS=TERMUX
-		BIN="${PREFIX}/bin"
-	else
-		OS=DEBIAN 
-		BIN="/usr/bin"
-fi
-}
 
 function Dependicies() {
 for i in apache2 php jq tail curl wget; do
