@@ -44,6 +44,7 @@ for i in apache2 php jq tail curl wget; do
 }
 
 ### INSTALL SCRIPT WGET INSTEAD OF GIT CLONE
+# check or do as per device arch for ngrok installation
 
 function install_ngrok() {
 if [ ! -f  "${BIN}/ngrok" ]; then
@@ -64,12 +65,19 @@ $authtoken >> /dev/null 2>&1 && chmod +x ngrok && mv ngrok $BIN
 }
 
 function final_touchup() {
-for i in shark do;
+for i in shark; do
 mv ${main}/shark/${i} ${BIN}
 # cp -R shark_logo ${BIN}
 printf "${purple} simply run : shark \n ${nc}"
+done
 }
 
+os
+git
+dependencies
+install_ngrok
+setup_ngrok
+final_touchup
 
 #####################################
 #       DON'T TRY TO COPY 😂😂     #
