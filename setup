@@ -16,28 +16,28 @@ blue="\033[1;34m"                                           ##
 nc="\e[0m"                                                  ## 
 
 
-BIN="${PREFIX}/bin"
-main="${PREFIX}/share"
 
 function os () {
-if [ -e $BIN/termux-info ]; then
-		OS=TERMUX			
-	else
-		OS=DEBIAN 
+cat /etc/os-release > /dev/null 2>&1
+if [ "$?" -eq "0" ]; then
+OS=DEBIAN 
 		BIN="/usr/bin"
-		main="/usr/share/shark"
+		main="/usr/share/shark"			
+	else
+		OS=TERMUX
+		BIN="${PREFIX}/bin"
+main="${PREFIX}/share"
 fi
 }
 
 function git_clone() { 
-sudo rm -rf ${main}
-git clone https://github.com/just-hack/shark
-sudo mv shark /usr/share/
+[ -d "${main}" ] && rm -rf ${main} > /dev/null 2>&1
+git clone https://github.com/just-hack/shark ${main}
 }
 
 
 function dependencies() {
-for i in apache2 php jq tail curl wget; do
+for i in apache2 php jq curl wget; do
     if [ ! -f "${BIN}/${i}" ]; then
     sudo apt-get install ${i} -y 
     fi
