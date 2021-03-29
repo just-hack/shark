@@ -15,7 +15,7 @@ purple="\033[0;35m"                                         ##
 blue="\033[1;34m"                                           ##
 nc="\e[0m"                                                  ## 
 
-
+arch=`uname -m`
 
 function os () {
 cat /etc/os-release > /dev/null 2>&1
@@ -45,28 +45,30 @@ for i in apache2 php jq curl wget; do
 }
 
 ### INSTALL SCRIPT WGET INSTEAD OF GIT CLONE
-# check or do as per device arch for ngrok installation
-
-function install_ngrok() {
-if [ ! -f  "${BIN}/ngrok" ]; then
-printf "${white} installing ngrok"
-if [ $OS != "TERMUX" ]; then
-wget https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-linux-amd64.zip -O ngrok.zip
-else
-wget https://github.com/Linux-Droid/Ngrok/raw/master/Ngrok_Linux_Droid.zip -O ngrok.zip
-fi
-unzip ngrok.zip && rm -rf ngrok.zip
-fi
-}
 
 function setup_ngrok() {
+if [ ! -f  "${BIN}/ngrok" ]; then
+printf "${white} installing ngrok"
+if [[ ("$arch" == *'arm'*) || ("$arch" == *'Android'*) ]]; then
+			ngrok_url="https://github.com/Linux-Droid/Ngrok/raw/master/Ngrok_Linux_Droid.zip"
+		elif [[ "$arch" == *'aarch64'* ]]; then
+			ngrok_url="https://github.com/Linux-Droid/Ngrok/raw/master/Ngrok_Linux_Droid.zip"
+		elif [[ "$arch" == *'x86_64'* ]]; then
+			ngrok_url="https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-linux-amd64.zip"
+		else
+			ngrok_url="https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-linux-386.zip"
+		fi
+		wget ${ngrok_url} -O ngrok.zip
+unzip ngrok.zip && rm -rf ngrok.zip && chmod +x ngrok && mv ngrok $BIN
 printf "${green} Enter your ngrok authtoken :\n "
 read authtoken
-$authtoken >> /dev/null 2>&1 && chmod +x ngrok && mv ngrok $BIN
+$authtoken >> /dev/null 2>&1 
+fi
 }
 
 function final_touchup() {
 for i in shark; do
+chmod +x ${main}/${i}
 sudo mv ${main}/${i} ${BIN}
 # cp -R shark_logo ${BIN}
 printf "${purple} simply run : shark \n ${nc}"
@@ -76,7 +78,6 @@ done
 os
 git_clone
 dependencies
-install_ngrok
 setup_ngrok
 final_touchup
 
