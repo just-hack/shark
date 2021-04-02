@@ -268,10 +268,10 @@ cat ip.txt >> saved.ip.txt
 
 # KILL NGROK
 function kill_ngrok() {
-php="$(ps -efw | grep php | grep -v grep | awk '{print $2}')"
-ngrok="$(ps -efw | grep ngrok | grep -v grep | awk '{print $2}')"
-kill -9 $php > /dev/null 2>&1
-kill -9 $ngrok > /dev/null 2>&1
+Kill_php="$(ps -efw | grep php | grep -v grep | awk '{print $2}')"
+kill_ngrok="$(ps -efw | grep ngrok | grep -v grep | awk '{print $2}')"
+kill -9 ${kill_php} > /dev/null 2>&1
+kill -9 ${kill_ngrok} > /dev/null 2>&1
 }
 
 function url_checker() {
