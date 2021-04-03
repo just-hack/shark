@@ -86,7 +86,7 @@ if [ "$?" -eq "0" ]; then
 		OS=DEBIAN 
 	else	
 		BIN="${PREFIX}/bin"
-		phish="${PREFIX}/share/phs"
+		phish="${PREFIX}/share/shark/phs"
 		files="/sdcard"
 		shark="${PREFIX}/share/shark"
                 old_shark="${PREFIX}/bin/shark"
