@@ -39,7 +39,11 @@ git clone https://github.com/just-hack/shark ${main}
 function dependencies() {
 for i in apache2 php jq curl wget; do
     if [ ! -f "${BIN}/${i}" ]; then
+    if [ ${OS} != "DEBIAN" ]; then
+    apt-get install ${i} -y 
+    else
     sudo apt-get install ${i} -y 
+    fi
     fi
     done
 }
@@ -69,7 +73,7 @@ fi
 function final_touchup() {
 for i in shark; do
 chmod +x ${main}/${i}
-sudo mv ${main}/${i} ${BIN}
+mv ${main}/${i} ${BIN}
 # cp -R shark_logo ${BIN}
 printf "${purple} simply run : shark \n ${nc}"
 done
