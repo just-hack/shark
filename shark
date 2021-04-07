@@ -70,6 +70,10 @@ spinner() {
         tput cnorm
 }
 
+######
+# USER
+######
+
 
 #####
 # OS
@@ -80,7 +84,12 @@ function os () {
         if [ "$?" -eq "0" ]; then		
                 BIN="/usr/bin"
 	        phish="/usr/share/shark/phs"
-		files="$HOME/Desktop"
+		user_id="$(logname)"
+		if [ "$logname" = "root" ]; then 
+		         files="/root/Desktop"
+	        else
+		         files="/home/${user_id}/Desktop"
+	        fi
 		shark="/usr/share/shark"
 		old_shark="/usr/bin/shark"
 		OS=DEBIAN
