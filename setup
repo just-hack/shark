@@ -64,7 +64,7 @@ if [[ ("$arch" == *'arm'*) || ("$arch" == *'Android'*) ]]; then
 		fi
 		wget ${ngrok_url} -O ngrok.zip
 unzip ngrok.zip && rm -rf ngrok.zip && chmod +x ngrok && mv ngrok $BIN
-printf "${green} Enter your ngrok authtoken :\n "
+printf "\n${green} Enter your ngrok authtoken : "
 read authtoken
 $authtoken >> /dev/null 2>&1 
 fi
