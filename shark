@@ -187,7 +187,7 @@ function fix_patches() {
 	splashdown="shark patches fixed";echo
 	os;sed -i -e 's/\r$//' ${shark}/setup
 	chmod 777 ${shark}/setup
-        (${shark}/setup > dev/null 2&>1) & spinner
+        (${shark}/setup > /dev/null 2&>1) & spinner
 }
 
 function assist() {	
