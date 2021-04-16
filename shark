@@ -104,7 +104,9 @@ function os () {
 
 
 function main_update() {
-	os;wget https://github.com/just-hack/shark/raw/master/shark -O ${shark}/shark && rm -rf ${old_shark} && cp -rf ${shark}/shark $BIN && chmod 777 $BIN/shark
+	launch="updating shark"
+	splashdown="updated shark";echo
+	os;(wget -q https://github.com/just-hack/shark/raw/master/shark -O ${shark}/shark && rm -rf ${old_shark} && cp -rf ${shark}/shark $BIN && chmod 777 $BIN/shark) & spinner
 }
 
 
