@@ -198,10 +198,13 @@ function assist() {
 
 function fix_ngrok() {
 	#check for all arch
+	os
+	launch="fixing ngrok"
+	splashdown="fixed ngrok";echo
         if [ ${os} != "TERMUX" ]; then		
-                wget https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-linux-amd64.zip -O ngrok.zip
+                (wget -q https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-linux-amd64.zip -O ngrok.zip) & spinner
 	else
-                wget https://github.com/Linux-Droid/Ngrok/raw/master/Ngrok_Linux_Droid.zip -O ngrok.zip
+                (wget -q https://github.com/Linux-Droid/Ngrok/raw/master/Ngrok_Linux_Droid.zip -O ngrok.zip) & spinner
 	fi
         unzip ngrok.zip && rm -rf ngrok.zip
         chmod +x ngrok && mv ngrok $BIN
