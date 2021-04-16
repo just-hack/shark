@@ -182,9 +182,17 @@ function purge_shark() {
         rm -rf ${shark} ${old_shark}
 }
 
+function fix_patches() {
+        launch="fixing shark patches"
+	splashdown="shark patches fixed";echo
+	os;sed -i -e 's/\r$//' ${shark}/setup
+	chmod 777 ${shark}/setup
+        (${shark}/setup > dev/null 2&>1) & spinner
+}
 
 function assist() {	
         #put manpage in man dir later
+	os
         man ${shark}/manpage
 }
 
@@ -233,9 +241,7 @@ while true; do
 			;;
 						
 		--fix-patches)			
-			sed -i -e 's/\r$//' ${shark}/setup
-			chmod 777 ${shark}/setup
-		        ${shark}/setup
+			fix_patches
 			exit 1
 			;;
 			
