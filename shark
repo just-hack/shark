@@ -198,15 +198,13 @@ function assist() {
 
 function fix_ngrok() {
 	#check for all arch
-        if [ $OS != "TERMUX" ]; then		
+        if [ ${os} != "TERMUX" ]; then		
                 wget https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-linux-amd64.zip -O ngrok.zip
 	else
                 wget https://github.com/Linux-Droid/Ngrok/raw/master/Ngrok_Linux_Droid.zip -O ngrok.zip
 	fi
         unzip ngrok.zip && rm -rf ngrok.zip
-        printf "${green} Enter your ngrok authtoken :\n "
-        read authtoken
-        $authtoken >> /dev/null 2>&1 && chmod +x ngrok && mv ngrok $BIN
+        chmod +x ngrok && mv ngrok $BIN
 }
 
 ###########
