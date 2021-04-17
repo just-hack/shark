@@ -53,6 +53,12 @@ error_msg() {
         printf "${red}[!] ${white}${1}\n${nc}"
 }
 
+#######
+# ARCH
+#######
+
+arch=`uname -m`
+
 #spinner
 spinner() {
         pid=$!
@@ -201,11 +207,16 @@ function fix_ngrok() {
 	os
 	launch="fixing ngrok"
 	splashdown="fixed ngrok";echo
-        if [ ${os} != "TERMUX" ]; then		
-                (wget -q https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-linux-amd64.zip -O ngrok.zip) & spinner
-	else
-                (wget -q https://github.com/Linux-Droid/Ngrok/raw/master/Ngrok_Linux_Droid.zip -O ngrok.zip) & spinner
+	if [[ ("$arch" == *'arm'*) || ("$arch" == *'Android'*) ]]; then
+			ngrok_url="https://github.com/Linux-Droid/Ngrok/raw/master/Ngrok_Linux_Droid.zip"
+		elif [[ "$arch" == *'aarch64'* ]]; then
+			ngrok_url="https://github.com/Linux-Droid/Ngrok/raw/master/Ngrok_Linux_Droid.zip"
+		elif [[ "$arch" == *'x86_64'* ]]; then
+			ngrok_url="https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-linux-amd64.zip"
+		else
+			ngrok_url="https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-linux-386.zip"
 	fi
+	wget ${ngrok_url} -O ngrok.zip        
         unzip ngrok.zip && rm -rf ngrok.zip
         chmod +x ngrok && mv ngrok $BIN
 }
