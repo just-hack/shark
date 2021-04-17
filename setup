@@ -64,9 +64,7 @@ if [[ ("$arch" == *'arm'*) || ("$arch" == *'Android'*) ]]; then
 		fi
 		wget ${ngrok_url} -O ngrok.zip
 unzip ngrok.zip && rm -rf ngrok.zip && chmod +x ngrok && mv ngrok $BIN
-#printf "\n${green} Enter your ngrok authtoken : "
-#read authtoken
-#$authtoken >> /dev/null 2>&1 
+
 fi
 }
 
@@ -74,7 +72,6 @@ function final_touchup() {
 for i in shark; do
 chmod +x ${main}/${i}
 mv ${main}/${i} ${BIN}
-# cp -R shark_logo ${BIN}
 printf "${purple} simply run : shark \n ${nc}"
 done
 }
