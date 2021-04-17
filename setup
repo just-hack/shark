@@ -94,7 +94,7 @@ function final_touchup() {
 	for i in shark; do
 		chmod +x ${main}/${i}
 		mv ${main}/${i} ${BIN}
-		printf "\n${green} simply run : shark \n ${nc}"
+		printf "\n${purple} simply run : shark \n ${nc}"
 	done
 }
 
