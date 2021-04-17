@@ -84,7 +84,7 @@ function setup_ngrok() {
 			ngrok_url="https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-linux-386.zip"
 		fi
 		launch="installing ngrok";splashdown="installed ngrok";echo
-		(wget ${ngrok_url} -O ngrok.zip) & spinner
+		(wget --quiet ${ngrok_url} -O ngrok.zip) & spinner
 		unzip ngrok.zip && rm -rf ngrok.zip && chmod +x ngrok && mv ngrok $BIN
 	fi
 }
