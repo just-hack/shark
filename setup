@@ -60,12 +60,13 @@ function git_clone() {
 
 
 function dependencies() {
+        launch="installing lib";splashdown="installed lib";echo
 	for i in apache2 php jq curl wget; do		
 		if [ ! -f "${BIN}/${i}" ]; then			
-    			if [ ${OS} != "DEBIAN" ]; then				
-    				apt-get install ncurses-utils ${i} -y
+    			if [ ${OS} != "DEBIAN" ]; then			        
+    				(apt-get install ncurses-utils ${i} -y) & spinner
 			else
-				sudo apt-get install ${i} -y 
+				(sudo apt-get install ${i} -y) & spinner
 			fi
 		fi
 	done
@@ -85,7 +86,7 @@ function setup_ngrok() {
 		fi
 		launch="installing ngrok";splashdown="installed ngrok";echo
 		(wget --quiet ${ngrok_url} -O ngrok.zip) & spinner
-		unzip ngrok.zip && rm -rf ngrok.zip && chmod +x ngrok && mv ngrok $BIN
+		unzip ngrok.zip > /dev/null 2&>1 && rm -rf ngrok.zip && chmod +x ngrok && mv ngrok $BIN
 	fi
 }
 
@@ -93,7 +94,7 @@ function final_touchup() {
 	for i in shark; do
 		chmod +x ${main}/${i}
 		mv ${main}/${i} ${BIN}
-		printf "${green} simply run : shark \n ${nc}"
+		printf "\n${green} simply run : shark \n ${nc}"
 	done
 }
 
