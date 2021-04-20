@@ -220,6 +220,10 @@ function fix_ngrok() {
 	unzip -q ngrok.zip && rm -rf ngrok.zip && chmod +x ngrok && mv ngrok $BIN	
 }
 
+function fix_cloudshell() {
+	man ${shark}/cloudshell
+}
+
 ###########
 # OPTS ARG
 ###########
@@ -260,6 +264,11 @@ while true; do
 		        fix_ngrok
 		        exit 1
 			;;
+			
+		--fix-cloudshell)
+		        fix_cloudshell
+		        exit 1
+			;;	
 					
                 -*)			
                         echo "ERROR: unknown option '$1'" 1>&2
