@@ -75,6 +75,17 @@ spinner() {
         tput cnorm
 }
 
+#check root
+function check_root() {
+        if [ "$(whoami &2>/dev/null)" != "root" ] && [ "$(id -un &2>/dev/null)" != "root" ];then                
+                error_msg "\nAdmin user detected\n"               
+                error_msg "You must be root to run this script!\n"
+                error_msg "Use 'sudo !!'\n"               
+                exit 1
+	fi
+}
+
+
 ######
 # USER
 ######
@@ -98,6 +109,7 @@ function os () {
 		shark="/usr/share/shark"
 		old_shark="/usr/bin/shark"
 		OS=DEBIAN
+		check_root
 	else
 		BIN="${PREFIX}/bin"
 		phish="${PREFIX}/share/shark/phs"
