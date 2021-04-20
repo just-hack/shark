@@ -221,7 +221,7 @@ function fix_ngrok() {
 }
 
 function fix_cloudshell() {
-	man ${shark}/cloudshell
+	os;man ${shark}/cloudshell
 }
 
 ###########
