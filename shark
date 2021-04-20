@@ -177,8 +177,9 @@ Options:
   -h, --help        Print this help message
   -a, --assist      List detail discription of shark
   -p, --purge       Uninstall shark
-  --fix-ngrok       Fix ngrok issue (add new authtoken)
+  --fix-ngrok       Fix port forwarding issue 
   --fix-patches     Check missing packages & fix patches
+  --fix-cloudshell  Restart Vm and cloudshell & fix patches
 For additional info, see: https://github.com/Bhaviktutorials/shark
 EOF
 }
